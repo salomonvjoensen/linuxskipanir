@@ -57,16 +57,6 @@
         name: PyMySQL
         state: present
 
-    - name: Create .my.cnf for MySQL authentication
-      ansible.builtin.copy:
-        dest: "/root/.my.cnf"
-        content: |
-          [client]
-          user=kjak_user
-          password=kjak2kjak
-        mode: '0600'
-      become: yes
-
     - name: Ensure the database exists
       ansible.builtin.mysql_db:
         name: kjakdb
@@ -78,6 +68,16 @@
         password: kjak2kjak
         priv: 'kjakdb.*:ALL'
         state: present
+
+    - name: Create .my.cnf for MySQL authentication
+      ansible.builtin.copy:
+        dest: "/root/.my.cnf"
+        content: |
+          [client]
+          user=kjak_user
+          password=kjak2kjak
+        mode: '0600'
+      become: yes
 
     - name: Copy SQL script to target machine
       ansible.builtin.copy:
