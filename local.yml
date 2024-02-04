@@ -61,9 +61,9 @@
 
     - name: Copy SQL script to target machine
       ansible.builtin.copy:
-        src: /sql/kjakdb_script.sql
-        dest: /tmp/kjakdb_script.sql
+        src: /sql/kjakdb.sql
+        dest: /tmp/kjakdb.sql
 
     - name: Execute SQL script to generate kjakdb
       ansible.builtin.command:
-        cmd: mysql -u kjak_user -pkjak2kjak kjakdb < /tmp/kjakdb_script.sql
+        cmd: mysql -u kjak_user -p kjak2kjak kjakdb < /tmp/kjakdb.sql
