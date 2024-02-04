@@ -11,7 +11,59 @@
         state: started
         enabled: true
 
-    - name: Copy index.html
+    - name: Copy index.php
       ansible.builtin.copy:
-        src: www/index.html
-        dest: /var/www/html/index.html
+        src: www/index.php
+        dest: /var/www/html/index.php
+
+    - name: Copy conn.php
+      ansible.builtin.copy:
+        src: www/conn.php
+        dest: /var/www/html/conn.php
+
+    - name: Copy create_thread.php
+      ansible.builtin.copy:
+        src: www/create_thread.php
+        dest: /var/www/html/create_thread.php
+
+    - name: Copy view_forum.php
+      ansible.builtin.copy:
+        src: www/view_forum.php
+        dest: /var/www/html/view_forum.php
+
+    - name: Copy view_thread.php
+      ansible.builtin.copy:
+        src: www/view_thread.php
+        dest: /var/www/html/view_thread.php
+
+    - name: Install MariaDB server
+      ansible.builtin.apt:
+        name: mariadb-server
+        state: present
+
+    - name: Start and enable MariaDB service
+      ansible.builtin.service:
+        name: mariadb
+        state: started
+        enabled: true
+
+    - name: Ensure the database exists
+      ansible.builtin.mysql_db:
+        name: kjakdb
+        state: present
+
+    - name: Ensure the kjakdb user exists with privileges
+      ansible.builtin.mysql_user:
+        name: kjak_user
+        password: kjak2kjak
+        priv: 'kjakdb.*:ALL'
+        state: present
+
+    - name: Copy SQL script to target machine
+      ansible.builtin.copy:
+        src: /sql/kjakdb_script.sql
+        dest: /tmp/kjakdb_script.sql
+
+    - name: Execute SQL script to generate kjakdb
+      ansible.builtin.command:
+        cmd: mysql -u kjak_user -pkjak2kjak kjakdb < /tmp/kjakdb_script.sql
