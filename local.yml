@@ -61,6 +61,8 @@
       ansible.builtin.mysql_db:
         name: kjakdb
         state: present
+        login_user: root
+        login_password: kjak2kjak
 
     - name: Ensure the kjakdb user exists with privileges
       ansible.builtin.mysql_user:
@@ -68,6 +70,8 @@
         password: kjak2kjak
         priv: 'kjakdb.*:ALL'
         state: present
+        login_user: root
+        login_password: kjak2kjak
 
     - name: Create .my.cnf for MySQL authentication
       ansible.builtin.copy:
