@@ -8,7 +8,7 @@
 -- PHP Version: 8.1.2-1ubuntu2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
+--START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -96,19 +96,19 @@ ALTER TABLE `kjak_thread`
 -- AUTO_INCREMENT for table `kjak_post`
 --
 ALTER TABLE `kjak_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT
 
 --
 -- AUTO_INCREMENT for table `kjak_table`
 --
 ALTER TABLE `kjak_table`
-  MODIFY `forum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `forum_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kjak_thread`
 --
 ALTER TABLE `kjak_thread`
-  MODIFY `thread_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `thread_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -125,7 +125,7 @@ ALTER TABLE `kjak_post`
 --
 ALTER TABLE `kjak_thread`
   ADD CONSTRAINT `kjak_thread_ibfk_1` FOREIGN KEY (`forum_id`) REFERENCES `kjak_table` (`forum_id`) ON DELETE CASCADE;
-COMMIT;
+--COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
