@@ -47,6 +47,16 @@
         state: started
         enabled: true
 
+    - name: Create .my.cnf for MySQL authentication
+      ansible.builtin.copy:
+        dest: "/root/.my.cnf"
+        content: |
+          [client]
+          user=kjak_user
+          password=kjak2kjak
+        mode: '0600'
+      become: yes
+
     - name: Ensure the database exists
       ansible.builtin.mysql_db:
         name: kjakdb
@@ -66,4 +76,25 @@
 
     - name: Execute SQL script to generate kjakdb
       ansible.builtin.command:
-        cmd: mysql -u kjak_user -p kjak2kjak kjakdb < /tmp/kjakdb.sql
+        cmd: mysql kjakdb < /tmp/kjakdb.sql
+
+    - name: Ensure the MariaDB user 'anon' exists
+      ansible.builtin.mysql_user:
+        name: anon
+        password: anonbrúkari
+        host: localhost
+        state: present
+
+    - name: Grant INSERT and UPDATE permissions to 'anon' on 'kjak_post'
+      ansible.builtin.mysql_user:
+        name: anon
+        host: localhost
+        priv: 'kjakdb.kjak_post:INSERT,UPDATE'
+        state: present
+
+    - name: Grant INSERT and UPDATE permissions to 'anon' on 'kjak_thread'
+      ansible.builtin.mysql_user:
+        name: anon
+        host: localhost
+        priv: 'kjakdb.kjak_thread:INSERT,UPDATE'
+        state: present
