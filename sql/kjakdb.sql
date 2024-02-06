@@ -66,22 +66,24 @@ CREATE TABLE IF NOT EXISTS `kjak_thread` (
 --
 -- Indexes for table `kjak_post`
 --
-ALTER TABLE `kjak_post`
-  ADD PRIMARY KEY (`post_id`),
-  ADD KEY `thread_id` (`thread_id`);
+--ALTER TABLE `kjak_post`
+--  ADD PRIMARY KEY (`post_id`),
+--  ADD KEY `thread_id` (`thread_id`);
 
 --
 -- Indexes for table `kjak_table`
 --
-ALTER TABLE `kjak_table`
-  ADD PRIMARY KEY (`forum_id`);
+--ALTER TABLE `kjak_table`
+--  ADD PRIMARY KEY (`forum_id`);
 
 --
 -- Indexes for table `kjak_thread`
 --
-ALTER TABLE `kjak_thread`
-  ADD PRIMARY KEY (`thread_id`),
-  ADD KEY `forum_id` (`forum_id`);
+--ALTER TABLE `kjak_thread`
+--  ADD PRIMARY KEY (`thread_id`),
+--  ADD KEY `forum_id` (`forum_id`);
+
+-- --------------------------------------------------------
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -90,20 +92,20 @@ ALTER TABLE `kjak_thread`
 --
 -- AUTO_INCREMENT for table `kjak_post`
 --
-ALTER TABLE `kjak_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
+--ALTER TABLE `kjak_post`
+--  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kjak_table`
 --
-ALTER TABLE `kjak_table`
-  MODIFY `forum_id` int(11) NOT NULL AUTO_INCREMENT;
+--ALTER TABLE `kjak_table`
+--  MODIFY `forum_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kjak_thread`
 --
-ALTER TABLE `kjak_thread`
-  MODIFY `thread_id` int(11) NOT NULL AUTO_INCREMENT;
+--ALTER TABLE `kjak_thread`
+--  MODIFY `thread_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -112,14 +114,14 @@ ALTER TABLE `kjak_thread`
 --
 -- Constraints for table `kjak_post`
 --
-ALTER TABLE `kjak_post`
-  ADD CONSTRAINT `kjak_post_ibfk_1` FOREIGN KEY (`thread_id`) REFERENCES `kjak_thread` (`thread_id`) ON DELETE CASCADE;
+--ALTER TABLE `kjak_post`
+--  ADD CONSTRAINT `kjak_post_ibfk_1` FOREIGN KEY (`thread_id`) REFERENCES `kjak_thread` (`thread_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `kjak_thread`
 --
-ALTER TABLE `kjak_thread`
-  ADD CONSTRAINT `kjak_thread_ibfk_1` FOREIGN KEY (`forum_id`) REFERENCES `kjak_table` (`forum_id`) ON DELETE CASCADE;
+--ALTER TABLE `kjak_thread`
+--  ADD CONSTRAINT `kjak_thread_ibfk_1` FOREIGN KEY (`forum_id`) REFERENCES `kjak_table` (`forum_id`) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
 
