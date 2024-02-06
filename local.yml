@@ -92,34 +92,6 @@
         login_user: root
         login_password: kjak2kjak
 
-    # - name: Ensure the MariaDB user 'anon' exists
-    #   ansible.builtin.mysql_user:
-    #     name: anon
-    #     password: anonbrúkari
-    #     host: localhost
-    #     state: present
-
-    # - name: Grant SELECT permissions to 'anon' on all kjakdb 
-    #   ansible.builtin.mysql_user:
-    #     name: anon
-    #     host: localhost
-    #     priv: 'kjakdb.*:SELECT'
-    #     state: present
-
-    # - name: Grant INSERT and UPDATE permissions to 'anon' on 'kjak_post'
-    #   ansible.builtin.mysql_user:
-    #     name: anon
-    #     host: localhost
-    #     priv: 'kjakdb.kjak_post:INSERT,UPDATE'
-    #     state: present
-
-    # - name: Grant INSERT and UPDATE permissions to 'anon' on 'kjak_thread'
-    #   ansible.builtin.mysql_user:
-    #     name: anon
-    #     host: localhost
-    #     priv: 'kjakdb.kjak_thread:INSERT,UPDATE'
-    #     state: present
-
     - name: Copy SQL script to target machine
       ansible.builtin.copy:
         src: sql/kjakdb.sql
