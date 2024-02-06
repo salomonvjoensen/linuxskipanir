@@ -1,6 +1,37 @@
 <?php
 include 'conn.php'; // Make sure this points to your actual database connection script
 
+$forum_name = ""; // Initialize forum_name variable
+
+// Check if forum_id is provided and is a valid integer
+if (isset($_GET['forum_id']) && filter_var($_GET['forum_id'], FILTER_VALIDATE_INT)) {
+    $forum_id = $_GET['forum_id'];
+
+    try {
+        // Prepare a statement for fetching the forum name
+        $sqlForum = "SELECT forum_name FROM kjak_table WHERE forum_id = :forum_id";
+        $stmtForum = $pdo->prepare($sqlForum);
+        $stmtForum->execute(['forum_id' => $forum_id]);
+        
+        // Fetch the forum name
+        $result = $stmtForum->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $forum_name = $result['forum_name'];
+        } else {
+            // Handle case where no forum is found for the given id
+            throw new Exception("No forum found with the provided ID.");
+        }
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+        // Optionally redirect to a default page or display a specific message
+        exit();
+    }
+} else {
+    echo "Invalid forum ID provided.";
+    // Optionally redirect to a default page or display a specific message
+    exit();
+}
+
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdo->beginTransaction(); // Start transaction
