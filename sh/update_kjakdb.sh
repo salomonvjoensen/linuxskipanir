@@ -1,8 +1,36 @@
 #!/bin/bash
 
 DATABASE='kjakdb'
-MYSQL_USER='root'
-MYSQL_PASSWORD='kjak2kjak'
+MYSQL_ROOT_USER='root'
+MYSQL_ROOT_PASSWORD='kjak2kjak'
+ANON_USER='anon'
+ANON_PASSWORD='anonbrúkari'
+
+# Function to check if user exists and create if not
+ensure_user_exists() {
+  local user=$1
+  local password=$2
+
+  echo "Checking if user $user exists..."
+  if ! mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1 FROM mysql.user WHERE user = '$user'" | grep -q 1; then
+    echo "User $user does not exist, creating..."
+    mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -e "CREATE USER '$user'@'localhost' IDENTIFIED BY '$password';"
+  else
+    echo "User $user already exists."
+  fi
+}
+
+# Grant permissions to user
+grant_permissions() {
+  local user=$1
+  local database=$2
+  local table=$3
+  local privileges=$4
+
+  echo "Granting $privileges privileges to $user on $database..."
+  mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -e "GRANT $privileges ON $database.$table TO '$user'@'localhost';"
+  mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
+}
 
 # Function to check and add primary keys and indexes
 add_primary_key_and_index() {
@@ -55,6 +83,12 @@ set_auto_increment() {
   echo "Setting AUTO_INCREMENT for $column in $table..."
   mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -D "$DATABASE" -e "ALTER TABLE $table MODIFY $column int(11) NOT NULL AUTO_INCREMENT;"
 }
+
+# Ensure 'anon' user exists and grant permissions
+ensure_user_exists "$ANON_USER" "$ANON_PASSWORD"
+grant_permissions "$ANON_USER" "$DATABASE" "*" "SELECT"
+grant_permissions "$ANON_USER" "$DATABASE" "kjak_thread" "INSERT, UPDATE"
+grant_permissions "$ANON_USER" "$DATABASE" "kjak_post" "INSERT, UPDATE"
 
 # Add primary keys, indexes, and set auto-increment
 add_primary_key_and_index 'kjak_post' 'post_id' 'thread_id'
