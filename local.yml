@@ -87,7 +87,7 @@
         dest: "~/.my.cnf"
         content: |
           [client]
-          user=kjak_user
+          user=root
           password=kjak2kjak
         mode: '0600'
       become: yes
