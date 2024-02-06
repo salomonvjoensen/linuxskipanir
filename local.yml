@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  become: true
+  become: yes
   tasks:
     - name: Install Apache
       ansible.builtin.apt:
@@ -58,13 +58,13 @@
         name: PyMySQL
         state: present
 
-#    - name: Set root password for MySQL/MariaDB
-#      ansible.builtin.mysql_user:
-#      name: root
-#       password: kjak2kjak
-#        login_user: root
-#        check_implicit_admin: yes
-#        host_all: yes
+    - name: Set root password for MySQL/MariaDB
+      ansible.builtin.mysql_user:
+        name: root
+        password: kjak2kjak
+        login_user: root
+        check_implicit_admin: yes
+        host_all: yes
 
     - name: Ensure the database 'kjakdb' exists
       ansible.builtin.mysql_db:
@@ -110,6 +110,13 @@
         name: anon
         password: anonbrúkari
         host: localhost
+        state: present
+
+    - name: Grant SELECT permissions to 'anon' on all kjakdb 
+      ansible.builtin.mysql_user:
+        name: anon
+        host: localhost
+        priv: 'kjakdb.*:SELECT'
         state: present
 
     - name: Grant INSERT and UPDATE permissions to 'anon' on 'kjak_post'
