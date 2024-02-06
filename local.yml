@@ -5,6 +5,7 @@
     - name: Install Apache
       ansible.builtin.apt:
         name: apache2
+        state: present
     - name: Start the apache2 services
       ansible.builtin.service:
         name: apache2
@@ -57,7 +58,15 @@
         name: PyMySQL
         state: present
 
-    - name: Ensure the database exists
+    - name: Set root password for MySQL/MariaDB
+      ansible.builtin.mysql_user:
+        name: root
+        password: kjak2kjak
+        login_user: root
+        check_implicit_admin: yes
+        host_all: yes
+
+    - name: Ensure the database 'kjakdb' exists
       ansible.builtin.mysql_db:
         name: kjakdb
         state: present
@@ -75,7 +84,7 @@
 
     - name: Create .my.cnf for MySQL authentication
       ansible.builtin.copy:
-        dest: "/root/.my.cnf"
+        dest: "~/.my.cnf"
         content: |
           [client]
           user=kjak_user
@@ -88,9 +97,14 @@
         src: /sql/kjakdb.sql
         dest: /tmp/kjakdb.sql
 
-    - name: Execute SQL script to generate kjakdb
-      ansible.builtin.command:
-        cmd: mysql kjakdb < /tmp/kjakdb.sql
+    - name: Import SQL script into kjakdb database
+      ansible.builtin.mysql_db:
+        name: kjakdb
+        state: import
+        target: /tmp/kjakdb.sql
+        login_user: root
+        login_password: kjak2kjak
+
 
     - name: Ensure the MariaDB user 'anon' exists
       ansible.builtin.mysql_user:
