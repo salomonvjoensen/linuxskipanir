@@ -63,30 +63,6 @@ CREATE TABLE IF NOT EXISTS `kjak_thread` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-
---
--- The 3 tuples that will be inserted in to the Forum.
---
-
-INSERT INTO `kjak_table` (`forum_name`, `description`)
-SELECT * FROM (SELECT 'Tíðindir', 'Hvat nýtt veitst tú?') AS tmp
-WHERE NOT EXISTS (
-  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Tíðindir'
-) LIMIT 1;
-
-INSERT INTO `kjak_table` (`forum_name`, `description`)
-SELECT * FROM (SELECT 'Kjak', 'Kjak um hvat sum helst.') AS tmp
-WHERE NOT EXISTS (
-  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Kjak'
-) LIMIT 1;
-
-INSERT INTO `kjak_table` (`forum_name`, `description`)
-SELECT * FROM (SELECT 'Áhugi', 'Lat heimin vita um tíni áhugamál.') AS tmp
-WHERE NOT EXISTS (
-  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Áhugi'
-) LIMIT 1;
-
--- --------------------------------------------------------
 --
 -- Indexes for table `kjak_post`
 --
@@ -144,6 +120,30 @@ ALTER TABLE `kjak_post`
 --
 ALTER TABLE `kjak_thread`
   ADD CONSTRAINT `kjak_thread_ibfk_1` FOREIGN KEY (`forum_id`) REFERENCES `kjak_table` (`forum_id`) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+
+--
+-- The 3 tuples that will be inserted in to the Forum.
+--
+
+INSERT INTO `kjak_table` (`forum_name`, `description`)
+SELECT * FROM (SELECT 'Tíðindir', 'Hvat nýtt veitst tú?') AS tmp
+WHERE NOT EXISTS (
+  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Tíðindir'
+) LIMIT 1;
+
+INSERT INTO `kjak_table` (`forum_name`, `description`)
+SELECT * FROM (SELECT 'Kjak', 'Kjak um hvat sum helst.') AS tmp
+WHERE NOT EXISTS (
+  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Kjak'
+) LIMIT 1;
+
+INSERT INTO `kjak_table` (`forum_name`, `description`)
+SELECT * FROM (SELECT 'Áhugi', 'Lat heimin vita um tíni áhugamál.') AS tmp
+WHERE NOT EXISTS (
+  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Áhugi'
+) LIMIT 1;
 --COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
