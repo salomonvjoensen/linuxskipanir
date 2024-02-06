@@ -98,17 +98,13 @@
         password: anonbrúkari
         host: localhost
         state: present
-        login_user: root
-        login_password: kjak2kjak
 
-    - name: Grant SELECT permissions to 'anon' on all kjakdb
+    - name: Grant SELECT permissions to 'anon' on all kjakdb 
       ansible.builtin.mysql_user:
         name: anon
         host: localhost
         priv: 'kjakdb.*:SELECT'
         state: present
-        login_user: root
-        login_password: kjak2kjak
 
     - name: Grant INSERT and UPDATE permissions to 'anon' on 'kjak_post'
       ansible.builtin.mysql_user:
@@ -116,8 +112,6 @@
         host: localhost
         priv: 'kjakdb.kjak_post:INSERT,UPDATE'
         state: present
-        login_user: root
-        login_password: kjak2kjak
 
     - name: Grant INSERT and UPDATE permissions to 'anon' on 'kjak_thread'
       ansible.builtin.mysql_user:
@@ -125,8 +119,6 @@
         host: localhost
         priv: 'kjakdb.kjak_thread:INSERT,UPDATE'
         state: present
-        login_user: root
-        login_password: kjak2kjak
 
     - name: Copy SQL script to target machine
       ansible.builtin.copy:
