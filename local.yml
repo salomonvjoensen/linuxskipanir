@@ -82,16 +82,6 @@
         login_user: root
         login_password: kjak2kjak
 
-    - name: Create .my.cnf for MySQL authentication
-      ansible.builtin.copy:
-        dest: "~/.my.cnf"
-        content: |
-          [client]
-          user=root
-          password=kjak2kjak
-        mode: '0600'
-      become: yes
-
     # - name: Ensure the MariaDB user 'anon' exists
     #   ansible.builtin.mysql_user:
     #     name: anon
