@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `kjak_post`
 --
 
-CREATE TABLE `kjak_post` (
+CREATE TABLE IF NOT EXISTS `kjak_post` (
   `post_id` int(11) NOT NULL,
   `thread_id` int(11) DEFAULT NULL,
   `author_name` varchar(255) DEFAULT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `kjak_post` (
 -- Table structure for table `kjak_table`
 --
 
-CREATE TABLE `kjak_table` (
+CREATE TABLE IF NOT EXISTS `kjak_table` (
   `forum_id` int(11) NOT NULL,
   `forum_name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE `kjak_table` (
 -- Table structure for table `kjak_thread`
 --
 
-CREATE TABLE `kjak_thread` (
+CREATE TABLE IF NOT EXISTS `kjak_thread` (
   `thread_id` int(11) NOT NULL,
   `forum_id` int(11) DEFAULT NULL,
   `thread_title` varchar(255) NOT NULL,
@@ -65,9 +65,28 @@ CREATE TABLE `kjak_thread` (
 -- --------------------------------------------------------
 
 --
--- Indexes for dumped tables
+-- The 3 tuples that will be inserted in to the Forum.
 --
 
+INSERT INTO `kjak_table` (`forum_name`, `description`)
+SELECT * FROM (SELECT 'Tíðindir', 'Hvat nýtt veitst tú?') AS tmp
+WHERE NOT EXISTS (
+  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Tíðindir'
+) LIMIT 1;
+
+INSERT INTO `kjak_table` (`forum_name`, `description`)
+SELECT * FROM (SELECT 'Kjak', 'Kjak um hvat sum helst.') AS tmp
+WHERE NOT EXISTS (
+  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Kjak'
+) LIMIT 1;
+
+INSERT INTO `kjak_table` (`forum_name`, `description`)
+SELECT * FROM (SELECT 'Áhugi', 'Lat heimin vita um tíni áhugamál.') AS tmp
+WHERE NOT EXISTS (
+  SELECT `forum_name` FROM `kjak_table` WHERE `forum_name` = 'Áhugi'
+) LIMIT 1;
+
+-- --------------------------------------------------------
 --
 -- Indexes for table `kjak_post`
 --
@@ -96,7 +115,7 @@ ALTER TABLE `kjak_thread`
 -- AUTO_INCREMENT for table `kjak_post`
 --
 ALTER TABLE `kjak_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kjak_table`
