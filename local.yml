@@ -92,19 +92,6 @@
         mode: '0600'
       become: yes
 
-    - name: Copy SQL script to target machine
-      ansible.builtin.copy:
-        src: sql/kjakdb.sql
-        dest: /tmp/kjakdb.sql
-
-    - name: Import SQL script into kjakdb database
-      ansible.builtin.mysql_db:
-        name: kjakdb
-        state: import
-        target: /tmp/kjakdb.sql
-        login_user: root
-        login_password: kjak2kjak
-
     - name: Ensure the MariaDB user 'anon' exists
       ansible.builtin.mysql_user:
         name: anon
@@ -132,3 +119,26 @@
         host: localhost
         priv: 'kjakdb.kjak_thread:INSERT,UPDATE'
         state: present
+
+    - name: Copy SQL script to target machine
+      ansible.builtin.copy:
+        src: sql/kjakdb.sql
+        dest: /tmp/kjakdb.sql
+
+    - name: Import SQL script into kjakdb database
+      ansible.builtin.mysql_db:
+        name: kjakdb
+        state: import
+        target: /tmp/kjakdb.sql
+        login_user: root
+        login_password: kjak2kjak
+
+    - name: Copy check and update script on kjakdb
+      ansible.builtin.copy:
+        src: sh/update_kjakdb.sh
+        dest: /tmp/update_kjakdb.sh
+        mode: '0755'
+
+    - name: Execute the update script on kjakdb
+      ansible.builtin.command:
+        cmd: /tmp/update_kjakdb.sh
