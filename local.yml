@@ -94,7 +94,7 @@
 
     - name: Copy SQL script to target machine
       ansible.builtin.copy:
-        src: /sql/kjakdb.sql
+        src: sql/kjakdb.sql
         dest: /tmp/kjakdb.sql
 
     - name: Import SQL script into kjakdb database
