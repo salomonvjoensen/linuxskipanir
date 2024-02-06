@@ -58,13 +58,13 @@
         name: PyMySQL
         state: present
 
-    - name: Set root password for MySQL/MariaDB
-      ansible.builtin.mysql_user:
-        name: root
-        password: kjak2kjak
-        login_user: root
-        check_implicit_admin: yes
-        host_all: yes
+#    - name: Set root password for MySQL/MariaDB
+#      ansible.builtin.mysql_user:
+#      name: root
+#       password: kjak2kjak
+#        login_user: root
+#        check_implicit_admin: yes
+#        host_all: yes
 
     - name: Ensure the database 'kjakdb' exists
       ansible.builtin.mysql_db:
@@ -104,7 +104,6 @@
         target: /tmp/kjakdb.sql
         login_user: root
         login_password: kjak2kjak
-
 
     - name: Ensure the MariaDB user 'anon' exists
       ansible.builtin.mysql_user:
