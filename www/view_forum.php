@@ -2,6 +2,7 @@
 include 'conn.php'; // Include your database connection
 
 $forum_id = isset($_GET['forum_id']) ? (int)$_GET['forum_id'] : 0;
+$forum_name = isset($_GET['forum_name']) ? urldecode($_GET['forum_name']) : ''; // Initialize forum_name variable
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $threadsPerPage = 20;
 $offset = ($page - 1) * $threadsPerPage;
@@ -26,9 +27,7 @@ try {
     die("Error: " . $e->getMessage());
 }
 
-$forum_name = ''; // Default to empty
-
-if ($forum_id > 0) {
+if ($forum_name == '') {
     try {
         $sqlForum = "SELECT forum_name FROM kjak_table WHERE forum_id = :forum_id";
         $stmtForum = $pdo->prepare($sqlForum);
