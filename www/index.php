@@ -23,7 +23,7 @@ try {
     <ul>
         <?php foreach ($forums as $forum): ?>
             <li>
-                <a href="view_forum.php?forum_id=<?php echo htmlspecialchars($forum['forum_id']); ?>">
+                <a href="view_forum.php?forum_id=<?php echo htmlspecialchars($forum['forum_id']); ?>&forum_name=<?php echo urlencode($forum['forum_name']); ?>">
                     <?php echo htmlspecialchars($forum['forum_name']); ?>
                 </a>
                 - <?php echo htmlspecialchars($forum['description']); ?>
