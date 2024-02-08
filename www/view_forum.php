@@ -70,6 +70,6 @@ if ($forum_id > 0) {
         </nav>
     <?php endif; ?>
     
-    <a href="create_thread.php?forum_id=<?php echo $forum_id; ?>">Nýggjan Tráð</a>
+    <a href="create_thread.php?forum_id=<?php echo $forum_id; ?>&forum_name=<?php echo urlencode($forum_name); ?>">Nýggjan Tráð</a>
 </body>
 </html>
