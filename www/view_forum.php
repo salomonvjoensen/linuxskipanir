@@ -27,6 +27,7 @@ try {
     die("Error: " . $e->getMessage());
 }
 
+// Only check for forum name if it is not in the URL.
 if ($forum_name == '') {
     try {
         $sqlForum = "SELECT forum_name FROM kjak_table WHERE forum_id = :forum_id";

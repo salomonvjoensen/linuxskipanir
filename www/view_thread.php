@@ -13,12 +13,33 @@ try {
     die("Error: " . $e->getMessage());
 }
 
+// Define number of posts per page
+$postsPerPage = 10;
+
+// Calculate total number of posts in this thread
+$sqlCountPosts = "SELECT COUNT(*) FROM kjak_post WHERE thread_id = :thread_id";
+$stmtCountPosts = $pdo->prepare($sqlCountPosts);
+$stmtCountPosts->execute(['thread_id' => $thread_id]);
+$totalPosts = $stmtCountPosts->fetchColumn();
+
+// Calculate total pages
+$totalPages = ceil($totalPosts / $postsPerPage);
+
+// Determine current page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : $totalPages; // Default to last page
+
+// Calculate offset
+$offset = ($page - 1) * $postsPerPage;
+
 // Fetch posts for the thread
 try {
-    $sqlPosts = "SELECT post_id, author_name, post_text, post_image, created_at FROM kjak_post WHERE thread_id = :thread_id ORDER BY created_at ASC";
+    $sqlPosts = "SELECT post_id, author_name, post_text, post_image, created_at FROM kjak_post WHERE thread_id = :thread_id ORDER BY created_at ASC LIMIT :offset, :postsPerPage";
     $stmtPosts = $pdo->prepare($sqlPosts);
-    $stmtPosts->execute(['thread_id' => $thread_id]);
-    $posts = $stmtPosts->fetchAll();
+    $stmtPosts->bindParam(':thread_id', $thread_id, PDO::PARAM_INT);
+    $stmtPosts->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $stmtPosts->bindParam(':postsPerPage', $postsPerPage, PDO::PARAM_INT);
+    $stmtPosts->execute();
+    $posts = $stmtPosts->fetchAll();    
 } catch (Exception $e) {
     die("Error: " . $e->getMessage());
 }
@@ -59,11 +80,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
                 $stmtUpdatePost->execute(['post_image' => $target_file, 'post_id' => $post_id]);
             }
         }
+        // what posts should be shown.
+        $newPage = ceil(($totalPosts + 1) / $postsPerPage);
 
         // Commit transaction
         $pdo->commit();
 
-        header("Location: view_thread.php?thread_id=" . $thread_id); // Redirect to the thread to show the new post
+        header("Location: view_thread.php?thread_id=" . $thread_id . "&page=" . $newPage); // Redirect to the last page with the new post
         exit();
     } catch (Exception $e) {
         $pdo->rollback();
@@ -92,6 +115,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
             <small>Skriva á: <?php echo htmlspecialchars($post['created_at']); ?></small>
         </div>
     <?php endforeach; ?>
+
+    <nav>
+        <div>
+            Síða: 
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="?thread_id=<?php echo $thread_id; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        <?php endfor; ?>
+        </div>
+    </nav>
 
     <h2>Svara tráð</h2>
     <form action="view_thread.php?thread_id=<?php echo $thread_id; ?>" method="post" enctype="multipart/form-data">
