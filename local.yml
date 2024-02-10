@@ -25,6 +25,16 @@
         src: www/index.php
         dest: /var/www/html/index.php
 
+    - name: Copy favicon.ico
+      ansible.builtin.copy:
+        src: www/favicon.ico
+        dest: /var/www/html/favicon.ico
+
+    - name: Copy style.css
+      ansible.builtin.copy:
+        src: www/style.css
+        dest: /var/www/html/style.css
+
     - name: Copy conn.php
       ansible.builtin.copy:
         src: www/conn.php
