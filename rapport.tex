@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\title{Rapport í Linux Skipanir}
+\author{Salomon Vágadal Joensen, 2022.210\\Jákup Paulason Olsen, 2020.006\\Helena Hentze, 2022.197}
+\date{1. Marts 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Problemformulering}
+Hvussu ger man eina kjak heimasíðu sum fólk kunnu vitja og stovna tráðir og leggja innlegg í? Og møguliga eisini hava møguleika at deila media har? 
+\begin{itemize}
+    \item Man má gera sær greitt at har má vera ein heimasíða, sum fólk vitja.
+    \item Á hesari heimasíðuni skal brúkarin kunna síggja kjaksíður
+    \begin{itemize}
+        \item Fara inn á eina kjak undirsíðu.
+        \item Síggja tráðir og kunna stovna tráðir.
+        \item Kunna fara inn á einkultar tráðir og svara í einum tráði og viðmerkja navn, tekstsvar og um tey vilja leggja mynd avtrat. 
+    \end{itemize}
+\end{itemize} 
+
+\section{Tólmenni}
+Ein Ubuntu Server við einari lokalari heimasíðu og brúkt ein MariaDB dátagrunn at goyma tráðirnir og postar í. PhpMyAdmin verður brúkt til at síggja dátagrunnin og tað er installera 
+
+\section{Mál / Framgangsháttur}
+Vit byrja við einari stutta analysu hvussu hetta skal fremjast.
+\begin{itemize}
+    \item Arkitektur bygnaða av probleminum og hvussu tað fer at síggja út.
+    \item Gera ein databasa í MariaDB har man kann stovna ein \textit{thread} í 3 ymiskum kjakforum har fólk kunna svara uppá.
+    \item Við einum fullfíggjaðum MariaDB datagrunn byggja eina heimasíðu sum virkar sum eitt \textit{interface} millum heimasíðuna og datagrunnin.
+    \item \textit{Business logic} millumlið verður brúkt PHP til samskifting millum heimasíðuna og MariaDB.
+    \item Millumliðið fer at avgera hvussu úrslit frá datagrunninum verður víst.
+    
+\end{itemize}
+
+\end{document}
