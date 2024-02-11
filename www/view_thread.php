@@ -101,9 +101,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
 <head>
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($thread['thread_title'] ?? 'Thread'); ?></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1><?php echo htmlspecialchars($thread['thread_title']); ?></h1>
+    <div class="gradient-box">
+        <div class="small-title">Tráður:</div>
+        <div class="title"><?php echo htmlspecialchars($thread['thread_title']); ?></div>
+    </div>
 
     <?php foreach ($posts as $post): ?>
         <div class="post">

@@ -64,9 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Stovna tráð í <?php echo htmlspecialchars($forum_name); ?></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Stovna nýggjan tráð í <?php echo htmlspecialchars($forum_name); ?></h1>
+    <div class="gradient-box"><div class="small-title">Stovna nýggjan tráð í</div><div class="title"><?php echo htmlspecialchars($forum_name); ?></div></div>
+    <br>
     <form action="create_thread.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="forum_id" value="<?php echo $_GET['forum_id']; ?>">
         <label for="thread_title">Tráð Navn:</label>

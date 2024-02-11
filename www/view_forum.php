@@ -2,7 +2,6 @@
 include 'conn.php'; // Include your database connection
 
 $forum_id = isset($_GET['forum_id']) ? (int)$_GET['forum_id'] : 0;
-$forum_name = isset($_GET['forum_name']) ? urldecode($_GET['forum_name']) : ''; // Initialize forum_name variable
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $threadsPerPage = 20;
 $offset = ($page - 1) * $threadsPerPage;
@@ -45,10 +44,14 @@ if ($forum_name == '') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title><?php echo htmlspecialchars($forum_name); ?></title>
 </head>
 <body>
-    <h1><?php echo htmlspecialchars($forum_name); ?></h1>
+    <div class="gradient-box">
+        <div class="small-title">Forum:</div>
+        <div class="title"><?php echo htmlspecialchars($forum_name); ?></div>
+    </div>
     <ul>
         <?php foreach ($threads as $thread): ?>
             <li>
