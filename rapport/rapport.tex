@@ -2,20 +2,23 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{pdfpages}
+\usepackage{graphicx}
 
 \title{Rapport í Linux Skipanir}
 \author{Salomon Vágadal Joensen, 2022.210\\Jákup Paulason Olsen, 2020.006\\Helena Hentze, 2022.197}
 \date{1. Marts 2024}
 
 \begin{document}
-
-\maketitle
+\includepdf[pages=-]{"Rapport_frontpage_kjakid.pdf"}
+\includepdf[pages=-]{"titlepage_kjakid.pdf"}
+%\maketitle
 
 \section{Problemformulering}
 Hvussu ger man eina kjak heimasíðu sum fólk kunnu vitja og stovna tráðir og leggja innlegg í? Og møguliga eisini hava møguleika at deila media har? 
 \begin{itemize}
     \item Man má gera sær greitt at har má vera ein heimasíða, sum fólk vitja.
-    \item Á hesari heimasíðuni skal brúkarin kunna síggja kjaksíður
+    \item Á hesari heimasíðuni skal brúkarin kunna síggja kjaksíður.
     \begin{itemize}
         \item Fara inn á eina kjak undirsíðu.
         \item Síggja tráðir og kunna stovna tráðir.
@@ -24,7 +27,11 @@ Hvussu ger man eina kjak heimasíðu sum fólk kunnu vitja og stovna tráðir og
 \end{itemize} 
 
 \section{Tólmenni}
-Ein Ubuntu Server við einari lokalari heimasíðu og brúkt ein MariaDB dátagrunn at goyma tráðirnir og postar í. PhpMyAdmin verður brúkt til at síggja dátagrunnin og tað er installera 
+Ein Ubuntu Server við einari lokalari heimasíðu og brúkt ein MariaDB dátagrunn
+at goyma tráðirnir og postar í.
+PhpMyAdmin verður brúkt til at síggja dátagrunnin og tað er installera á sjálva servaran,
+men er ikki partur av Ansible playbook, tí tað er ikki neyðugt fyri at fáa kjak heimasíðuna
+at virka.
 
 \section{Mál / Framgangsháttur}
 Vit byrja við einari stutta analysu hvussu hetta skal fremjast.
@@ -36,5 +43,9 @@ Vit byrja við einari stutta analysu hvussu hetta skal fremjast.
     \item Millumliðið fer at avgera hvussu úrslit frá datagrunninum verður víst.
     
 \end{itemize}
+
+\section{Design}
+
+\section{}
 
 \end{document}
