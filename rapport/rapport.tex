@@ -74,8 +74,35 @@ og ein \textit{conn.php} við
     \item \textit{create\_thread.php} \- Fyri at stovna ein nýggjan tráð.
 \end{itemize}
 
+\par Hesar 6 fílar (og eisini 7nda \textit{favicon.ico} fílin) verða stovnaðir
+av at koyra kommandoina á einari VM við \textit{Ansible}:
+\newline
+\par \textbf{ansible-pull -U https://github.com/salomonvjoensen/linuxskipanir.git}
+\newline
+\par Tað ekskeverarar eina \textit{Ansible} Playbook \textbf{local.yml} á hasum
+repository sum ger her hesu trin idempotentli (t.v.s. kann vera endurtikið uttan at
+bróta uppá nakað ella gera óneyðug kopiir):
+\begin{itemize}
+    \item Installerar Apache2, startar Apache2.
+    \item Ger eina \textit{uploads} mappu í \textit{/var/www/html/uploads}
+    \item Tær 7 fílir kopieraðar yvir til \textit{html} mappuna.
+    \item \textbf{MariaDB} tænasta verður stovna og byrja.
+    \item \textbf{Pip} og \textbf{PyMySQL} verða installera.
+    \item Stovna \textit{kjakdb} dátagrunnin.
+    \item Stovna \textit{kjak\_user} brúkaran fyri dátagrunnin.
+    \item Koyra SQL script á dátagrunnin fyri at gera tær neyðugu tabellirnar.
+    \item Til seinast koyra eitt \textit{bash} script til at dagføra dátagrunnin.
+\end{itemize}
+
+ Aftaná kann man opna \underline{localhost} í ein kagara og Kjak heimasíðan er uppi
+ og koyrir.
+
 \section{Tíðarætlan}
-\par 
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{tíðarætlan.png}
+    \caption{Skermmynd tikin av tíðarætlan mánadagin 12. februar 2024}
+    \label{fig:tíðarætlan.png}
+\end{figure}
 
 \section{Appendix}
 
