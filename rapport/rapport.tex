@@ -1,9 +1,13 @@
 \documentclass{article}
+
 \usepackage{graphicx} % Required for inserting images
 \usepackage{float}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
 \usepackage{pdfpages}
+
+
 
 \title{Rapport í Linux Skipanir}
 \author{Salomon Vágadal Joensen, 2022.210\\Jákup Paulason Olsen, 2020.006\\Helena Hentze, 2022.197}
@@ -63,15 +67,24 @@ dátagrunnins 3 tabellir. Annars er ein CSS fíl \textit{style.css} fyri uppseti
 og ein \textit{conn.php} við
 íbinding upplýsingarnar til dátagrunnin. Tær 4 síðurnar eru:
 \begin{itemize}
-    \item \textit{index.php} Heimasíðan sum vísur forumini.
-    \item \textit{view\_forum.php} Undirsíðan fyri at vísa tráðir fyri eitt forum.
-    \item \textit{view\_thread.php} Undirsíðan fyri at vísa ein á tráð og allar svør í tí
+    \item \textit{index.php} \- Heimasíðan sum vísur forumini.
+    \item \textit{view\_forum.php} \- Undirsíðan fyri at vísa tráðir fyri eitt forum.
+    \item \textit{view\_thread.php} \- Undirsíðan fyri at vísa ein á tráð og allar svør í tí
             tráðinum.
-    \item \textit{create\_thread.php} Fyri at stovna ein nýggjan tráð.
+    \item \textit{create\_thread.php} \- Fyri at stovna ein nýggjan tráð.
 \end{itemize}
+
+\section{Tíðarætlan}
+\par 
 
 \section{Appendix}
 
 \includepdf[pages=-]{kjakdb_schema.pdf}
+
+\includepdf[pages=-]{local.yml.pdf}
+
+\includepdf[pages=-]{kjakdb.sql.pdf}
+
+\includepdf[pages=-]{update_kjakdb.sh.pdf}
 
 \end{document}
