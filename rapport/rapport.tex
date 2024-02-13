@@ -77,7 +77,8 @@ og ein \textit{conn.php} við
 \par Hesar 6 fílar (og eisini 7nda \textit{favicon.ico} fílin) verða stovnaðir
 av at koyra kommandoina á einari VM við \textit{Ansible}:
 \newline
-\par \textbf{ansible-pull -U https://github.com/salomonvjoensen/linuxskipanir.git}
+\newline
+\fbox{\par \textbf{ansible-pull -U https://github.com/salomonvjoensen/linuxskipanir.git}}
 \newline
 \par Tað ekskeverarar eina \textit{Ansible} Playbook \textbf{local.yml} á hasum
 repository sum ger her hesu trin idempotentli (t.v.s. kann vera endurtikið uttan at
@@ -106,12 +107,12 @@ bróta uppá nakað ella gera óneyðug kopiir):
 
 \section{Appendix}
 
-\includepdf[pages=-]{kjakdb_schema.pdf}
+\includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{kjakdb_schema.pdf}
 
-\includepdf[pages=-]{local.yml.pdf}
+\includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{local.yml.pdf}
 
-\includepdf[pages=-]{kjakdb.sql.pdf}
+\includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{kjakdb.sql.pdf}
 
-\includepdf[pages=-]{update_kjakdb.sh.pdf}
+\includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{update_kjakdb.sh.pdf}
 
 \end{document}
