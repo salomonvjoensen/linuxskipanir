@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E8F0F2; /* Light pastel background for overall calmness */
+    color: #4A4A4A; /* Soft, dark grey for text to ensure readability */
+}
+
+.forum {
+    margin: 20px auto;
+    max-width: 800px; /* Optimized width for readability */
+    padding: 20px;
+    background-color: #FAFFFB; /* Very soft pastel green for content background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Gentle shadow for a subtle depth */
+}
+
+.post {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #FFFFFF; /* Pure white for posts to stand out against the pastel background */
+    border: 1px solid #DDEDEE; /* Very light grey border for a soft delineation */
+    border-radius: 8px;
+}
+.post-id {
+    font-size: 0.8rem; /* Smaller font size for the ID */
+    color: #6c757d; /* A soft, dark grey for contrast without overpowering the title */
+    margin-left: 10px; /* Space it out from the post title */
+}
+
+.response {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ECFFEF; /* Very light pastel green for responses */
+    border-left: 4px solid #B7E4C7; /* Slightly stronger pastel green as an accent */
+    border-radius: 5px;
+}
+
+.response-id {
+    font-size: 0.8rem; /* Smaller font size for the ID */
+    color: #6c757d; /* Soft, dark grey for contrast */
+    margin-right: 10px; /* Space it out from the reply content */
+    font-weight: bold; /* Optional: make the ID bold for emphasis */
+}
+
+
+button {
+    background-color: #B7E4C7; /* Calming pastel green for buttons */
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #9FD3B8; /* A darker shade of pastel green for button hover */
+}
+
+.show-initial {
+    display: block; /* Ensures initial responses are visible */
+}
+
+/* Headings and typography adjustments for better hierarchy */
+h1 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    margin-top: 0;
+    color: #444; /* Slightly darker for post titles for emphasis */
+}

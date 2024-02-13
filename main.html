@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Image Board</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="forum" class="forum">
+    <h1>Forum Name</h1>
+    <!-- Posts will be loaded here dynamically -->
+
+    <div class="post">
+        <h2>Post Title <span class="post-id">#123</span></h2>
+        <p>Post content goes here. This can include text, images, or both.</p>
+        <button onclick="showResponses(this)">Show all replies</button>
+        <div class="response show-initial"><span class="response-id">#123-1 </span>Response 1</div>
+        <div class="response show-initial"><span class="response-id">#123-2 </span>Response 2</div>
+        <div class="response show-initial"><span class="response-id">#123-3 </span>Response 3</div>
+        <div class="response show-initial"><span class="response-id">#123-4 </span>Response 4</div>
+        <div class="response show-initial"><span class="response-id>#123-5 </span>Response 5</div>
+        <div class="response"><span class="response-id">#123-6 </span>Response 6</div>
+        <div class="response"><span class="response-id">#123-7 </span>Response 7</div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
