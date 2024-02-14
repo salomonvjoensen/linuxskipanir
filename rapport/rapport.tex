@@ -18,8 +18,14 @@
 \includepdf[pages=-]{titlepage_kjakid.pdf}
 %\maketitle
 
-\section{Problemformulering}
-\par Hvussu ger man eina kjak heimasíðu sum fólk kunnu vitja og stovna tráðir og leggja innlegg í? Og møguliga eisini hava møguleika at deila media har? 
+\section{Samandrátt (Abstract)}
+\par Í hesum rapporti stendur hvussu vit gjørdu eina kjak heimasíðu, hvat fyri tólmenni
+(harímillum Ansible, Apache2, MariaDB og PHP) vit brúktu og hvussu arkitektururin var uppbygdur
+til at fremja hetta í verki.
+
+\section{Trupulleika-orðing}
+\par Hvussu ger man eina kjak heimasíðu sum fólk kunnu vitja og stovna tráðir og leggja innlegg í? 
+Og møguliga eisini hava møguleika at deila media har? 
 \begin{itemize}
     \item Man má gera sær greitt at har má vera ein heimasíða, sum fólk vitja.
     \item Á hesari heimasíðuni skal brúkarin kunna síggja kjaksíður.
@@ -62,6 +68,8 @@ tær 3 tabelirnar eru relatarar. \textbf{kjak\_table} er høvuðs tabellin og he
 og \textbf{kjak\_thread} hevur \textit{Primary Key} \underline{thread\_id} til \textit{Foreign Key}
 til \textbf{kjak\_post}.
  
+\section{Lýsing av Loysn}
+
 \par Heimasíðan er bert 4 síður við embeddaða PHP kodu til at vísa dáta frá \textit{kjakdb}
 dátagrunnins 3 tabellir. Annars er ein CSS fíl \textit{style.css} fyri uppseting
 og ein \textit{conn.php} við
@@ -98,12 +106,44 @@ bróta uppá nakað ella gera óneyðug kopiir):
  Aftaná kann man opna \underline{localhost} í ein kagara og Kjak heimasíðan er uppi
  og koyrir.
 
+ \par Seinni kann man tillaga ting, so sum brúkarnar \textit{kjak\_user} og \textit{anon}
+í \textbf{MariaDB} og dagføra tilsvarandi \textit{conn.php} fílina til teir brúkarnar.
+
 \section{Tíðarætlan}
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{tíðarætlan.png}
     \caption{Skermmynd tikin av tíðarætlan mánadagin 12. februar 2024}
     \label{fig:tíðarætlan.png}
 \end{figure}
+
+\par Fyrst var dátagrunnurin designaður, so bleiv PHP kodan koda til dátagrunnin.
+Meðan tað varð arbeiða uppá tað byrjaðu vit so smátt at skriva rapportina og gera tað
+seinasta hondverki av CSS \& JS uppseting av heimasíðuna, bara so hon sær eitt sindur
+vøkur út.
+
+\section{Perspektivisering}
+\par Heimasíðan hevur tað mest einklu treytirnar fyri at vera hugsa sum ein kjak-heimasíða,
+Síggja nøkur forum, tráðir, stovna tráðir, svara á tráðum og leggja myndir út saman við svør.
+\par Tað er ein einkul kjak heimasíða, sum kundi verið nógv útbygt, mest sannlíknandi
+kundi verið at vitjandi kundu stovna brúkarar (um tey vildu), so tey sjálvu kundu strika
+teirra egnu tráðir og svør. Ting sum at indeksera heimasíðuna, so man kundi leita uppá
+dátagrunnin kundi eisini verið implementera.
+\par Tað er skjótt at fáa heimasíðuna upp at koyra bara við einari einklari bash kommandoina,
+givið man hevur \textbf{Ansible} á einum
+Linux líknandi umhvørvi (vit brúktu Ubuntu Server VM), og tað vísur eisini styrkina í \textbf{Ansible}.
+\par Vit hugsaðu um at brúka \textbf{Ansible Playbook}, so man kundi havt forriti koyrt á 
+fleiri umhvørvum men hvat er meiningin at hava fraktuera kjak á nógvum støðum, tá man kann hava
+eitt samla stað at kjakast í?
+
+\section{Niðurstøða}
+\par Okkara arbeiði og skeið gav okkum innlit hvussu man brúkar Linux umhvørvi og hvussu tað
+er at arbeiða næstan bara í einum terminal uppseting. Nógvar kommandoir skuldi man læra, og
+brýtir nógv frá tí vanda GUI umhvørvi man kennur mest frá Windows, men um man dugir kann man
+automatisera øgiliga nógv og næstan hálv-forrita redigering av fílum, her hugsi eg um \textit{vim}
+editorin.
+\par Kjak heimasíðan er einkul, men tøknin aftanfyri er sørmi ikki. Man kundi sett upp heimasíðuna
+uttan at hava \textbf{Ansible}, men tað hevði kravt nógv manuelt arbeiði hvørja ferð man skuldi
+sett upp eitt nýtt kjak heimasíðu umhvørvi aðra-staðnis.
 
 \section{Appendix}
 
