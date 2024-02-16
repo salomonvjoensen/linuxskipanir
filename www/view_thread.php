@@ -100,22 +100,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($thread['thread_title'] ?? 'Thread'); ?></title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="gradient-box">
+    <div id="forum" class="forum">
         <div class="small-title">Tráður:</div>
         <div class="title"><?php echo htmlspecialchars($thread['thread_title']); ?></div>
     </div>
 
     <?php foreach ($posts as $post): ?>
         <div class="post">
-            <h2><?php echo htmlspecialchars($post['author_name']); ?></h2>
-            <p><?php echo nl2br(htmlspecialchars($post['post_text'])); ?></p>
-            <?php if ($post['post_image']): ?>
-                <img src="<?php echo htmlspecialchars($post['post_image']); ?>" alt="Post Image">
-            <?php endif; ?>
+            <p><?php if ($post['post_image']): ?>
+                <img src="<?php echo htmlspecialchars($post['post_image']); ?>" class="post-image" alt="Post Image">
+                <?php endif; ?>
+                <h2><?php echo htmlspecialchars($post['author_name']); ?></h2>
+                <p><?php echo nl2br(htmlspecialchars($post['post_text'])); ?></p>
+            
+            </p>
             <small>Skriva á: <?php echo htmlspecialchars($post['created_at']); ?></small>
         </div>
     <?php endforeach; ?>
@@ -129,8 +132,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
         </div>
     </nav>
 
-    <h2>Svara tráð</h2>
-    <form action="view_thread.php?thread_id=<?php echo $thread_id; ?>" method="post" enctype="multipart/form-data">
+    <div class="button-form">
+        <button id="toggleCreateReplyButton" onClick="toggleReplyForm();">Svara tráð</button>
+    </div>
+
+    <form id="toggleReplyForm" style="visibility: hidden;" action="view_thread.php?thread_id=<?php echo $thread_id; ?>" method="post" enctype="multipart/form-data">
         <label for="author_name">Títt navn (valfrítt):</label>
         <input type="text" id="author_name" name="author_name"><br><br>
         <label for="post_text">Títt svar:</label>
@@ -138,5 +144,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
         <input type="file" id="post_image" name="post_image"><br><br>
         <input type="submit" name="submit_post" value="Post Reply">
     </form>
+    <script src="script.js"></script>
 </body>
 </html>
