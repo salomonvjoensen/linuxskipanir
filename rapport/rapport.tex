@@ -25,6 +25,8 @@
 (harímillum Ansible, Apache2, MariaDB og PHP) vit brúktu og hvussu arkitektururin var uppbygdur
 til at fremja hetta í verki. Eisini verður hugdi at hvussu front-síðan av heimasíðuni verður tillagur, 
 so at tað er lætt atkomiligt og gevur brúkarinum yvirlit av heimasíðuni.
+til at fremja hetta í verki. Eisini verður hugdi at hvussu front-síðan av heimasíðuni verður tillagur, 
+so at tað er lætt atkomiligt og gevur brúkarinum yvirlit av heimasíðuni.
 
 \section{Trupulleika-orðing}
 \par Hvussu ger man eina kjak heimasíðu sum fólk kunnu vitja og stovna tráðir og leggja innlegg í? 
@@ -38,6 +40,7 @@ Og møguliga eisini hava møguleika at deila media har?
 \begin{itemize}
     \item Tað má vera lætt at vita hvar man er og hvussu man kemur fram til brúkarin vil vera.
     \item Á hesari heimasíðuni skal brúkarin kunna síggja kjaksíður.
+    \item Tað má vera lætt at vita hvar man er og hvussu man kemur fram til brúkarin vil vera.
     \begin{itemize}
         \item Fáa yvirlit av kjak undirsíðunum.
         \item Fara inn á eina kjak undirsíðu.
@@ -104,11 +107,24 @@ tær 3 tabelirnar eru relatarar. \textbf{kjak\_table} er høvuðs tabellin og he
 og \textbf{kjak\_thread} hevur \textit{Primary Key} \underline{thread\_id} til \textit{Foreign Key}
 til \textbf{kjak\_post}.
  
+\subsection{Web Design}
+\par Lendingar síðan gevur yvirlit av teimum kjakforum sum eru, og leinkir til tey. Brúkarin
+velur tað forum teimum ynskir, og verður síðani koyrdur har til. Á kjakforum kunnu tey
+hyggja gjøgnum postar, síggja svør og fara ígjøgnum tráðir, samt sum at leggja egnir postir
+út ella leggja svar til aðrar postir og onnur svør. Fyri at síggja øll svør má brúkarin fara inn
+á postin, og um hann ynskir at síggja tráðir undir svørum til postin trýstir hann á "vís tráð".
+Litir eru valdir fyri at geva brúkarinum eina róliga kenslu, og grønt er ofta sett í samband
+við ró. Stórar yvirskriftir og stórir knappar eru valdir fyri at vera lættir at lesa. 
+
+\includegraphics[width=\linewidth]{rapport/Structure.jpg}
+
 \section{Lýsing av Loysn}
 
 \par Heimasíðan er bert 4 síður við embeddaða PHP kodu til at vísa dáta frá \textit{kjakdb}
 dátagrunnins 3 tabellir. Annars er ein CSS fíl \textit{style.css} fyri uppseting
 og ein \textit{conn.php} við
+íbinding upplýsingarnar til dátagrunnin. Eisini er ein JS fíl \textit{script.js} fyri summar funktónir.
+Tær 4 síðurnar eru:
 íbinding upplýsingarnar til dátagrunnin. Eisini er ein JS fíl \textit{script.js} fyri summar funktónir.
 Tær 4 síðurnar eru:
 \begin{itemize}
