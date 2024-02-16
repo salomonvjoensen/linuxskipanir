@@ -35,6 +35,11 @@
         src: www/style.css
         dest: /var/www/html/style.css
 
+    - name: Copy script.js
+      ansible.builtin.copy:
+        src: www/scrpt.js
+        dest: /var/www/html/script.js
+
     - name: Copy conn.php
       ansible.builtin.copy:
         src: www/conn.php
