@@ -65,11 +65,50 @@ function toggleResponses(button) {
 // Sets up click event listeners on images to toggle their size.
 function setupImageToggle() {
     document.querySelectorAll('.post-image, .response-image').forEach(image => {
-        image.addEventListener('click', function() {
-            // Toggle image size between 150x150 and 250x250.
-            const isExpanded = this.style.width === '250px' || this.style.width === '';
-            this.style.width = isExpanded ? '150px' : '250px';
-            this.style.height = isExpanded ? '150px' : '250px';
-        });
+        // initially set to 150px
+        image.style.width = '150px';
+        // image.style.height = '150px';
+
+      image.addEventListener('click', function() {
+        if (this.style.width === '150px') {
+          // Restore original size
+          this.style.width = ''; // Reset to default
+          this.style.height = '';  // Reset to default
+        } else {
+          // Set to 150px
+          this.style.width = '150px';
+          //this.style.height = '150px';
+        }
+      });
     });
+  }
+
+let formVisible = false;
+
+// Show or hide create thread form.
+function toggleThreadForm() {
+    if (!formVisible) {
+        formVisible = true;
+        document.getElementById("toggleCreateThread").style.visibility = "visible";
+        document.getElementById("toggleCreateThreadButton").innerText = "Fjal Tráð Form";
+    } else {
+        formVisible = false;
+        document.getElementById("toggleCreateThread").style.visibility = "hidden";
+        document.getElementById("toggleCreateThreadButton").innerText = "Vís  Tráð Form";
+    }
+}
+
+let replyVisible = false;
+
+// Show or hide reply form.
+function toggleReplyForm() {
+    if (!replyVisible) {
+        replyVisible = true;
+        document.getElementById("toggleReplyForm").style.visibility = "visible";
+        document.getElementById("toggleCreateReplyButton").innerText = "Fjal Svara Tráð";
+    } else {
+        replyVisible = false;
+        document.getElementById("toggleReplyForm").style.visibility = "hidden";
+        document.getElementById("toggleCreateReplyButton").innerText = "Svara Tráð";
+    }
 }
