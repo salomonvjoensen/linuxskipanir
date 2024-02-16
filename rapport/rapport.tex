@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{graphicx} % Required for inserting images
+\usepackage{svg} 
 \usepackage{float}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -70,6 +71,13 @@ og leggur teir í HTML á síðuni.
 
 
 \section{Design}
+\begin{figure}[H]
+    \centering
+    \includesvg[width=1\textwidth]{html-cs-db.svg} 
+    \caption{Samskifti millum heimasíðu og dátagrunnin.}
+    \label{fig:html-cs-db.svg}
+\end{figure}
+
 \par Ein Ubuntu Server við einari lokalari heimasíðu og brúkt ein MariaDB dátagrunn
 at goyma tráðirnir og postar í.
 PhpMyAdmin verður brúkt til at síggja dátagrunnin og tað er installera á sjálva servaran,
@@ -79,10 +87,10 @@ at virka.
 til ávis støð tá heimasíðan verður bygt. CSS verður nýtt til at pynta á HTML, fyri at fáa eina
 pena og lesiliga heimasíðu. JS verður nýtt fyri at fáa funktionalitet sum at goyma og víðka
 tráðir, minka og forstørra myndir. PHP verður brúkt til at dynamiskt byggja lutir av
-heimasíðuni, sum t.d. postar, svør og tráðir. 
+heimasíðuni, sum t.d. postar, svør og tráðir.
 
-\section{Uppseting}
- 
+\section{Lýsing av Loysn}
+
 \subsection{Web Uppseting}
 \par Lendingar síðan gevur yvirlit av teimum kjakforum sum eru, og leinkir til tey. Brúkarin
 velur tað forum teimum ynskir, og verður síðani koyrdur har til. Á kjakforum kunnu tey
@@ -92,8 +100,15 @@ hyggja gjøgnum postar, síggja svør og fara ígjøgnum tráðir, samt sum at l
 Litir eru valdir fyri at geva brúkarinum eina róliga kenslu, og grønt er ofta sett í samband
 við ró. Stórar yvirskriftir og stórir knappar eru valdir fyri at vera lættir at lesa. 
 
-\includegraphics[width=\linewidth]{Structure.jpg}
+%\includegraphics[width=1\includegraphicswidth]{Structure.jpg} 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=3cm]{Structure.jpg} 
+    \caption{Hvussu uppsetingin av forum er.} 
+  \end{figure}
+
+\subsection{Databasa Uppseting}
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{kjakdb_table_relations.png}
@@ -106,25 +121,11 @@ tær 3 tabelirnar eru relatarar. \textbf{kjak\_table} er høvuðs tabellin og he
 \textit{Primary Key} \underline{forum\_id} til \textit{Foreign Key} til \textbf{kjak\_thread},
 og \textbf{kjak\_thread} hevur \textit{Primary Key} \underline{thread\_id} til \textit{Foreign Key}
 til \textbf{kjak\_post}.
- 
-\subsection{Web Design}
-\par Lendingar síðan gevur yvirlit av teimum kjakforum sum eru, og leinkir til tey. Brúkarin
-velur tað forum teimum ynskir, og verður síðani koyrdur har til. Á kjakforum kunnu tey
-hyggja gjøgnum postar, síggja svør og fara ígjøgnum tráðir, samt sum at leggja egnir postir
-út ella leggja svar til aðrar postir og onnur svør. Fyri at síggja øll svør má brúkarin fara inn
-á postin, og um hann ynskir at síggja tráðir undir svørum til postin trýstir hann á "vís tráð".
-Litir eru valdir fyri at geva brúkarinum eina róliga kenslu, og grønt er ofta sett í samband
-við ró. Stórar yvirskriftir og stórir knappar eru valdir fyri at vera lættir at lesa. 
 
-\includegraphics[width=\linewidth]{rapport/Structure.jpg}
-
-\section{Lýsing av Loysn}
-
+\subsection{Heimasíðan}
 \par Heimasíðan er bert 4 síður við embeddaða PHP kodu til at vísa dáta frá \textit{kjakdb}
 dátagrunnins 3 tabellir. Annars er ein CSS fíl \textit{style.css} fyri uppseting
 og ein \textit{conn.php} við
-íbinding upplýsingarnar til dátagrunnin. Eisini er ein JS fíl \textit{script.js} fyri summar funktónir.
-Tær 4 síðurnar eru:
 íbinding upplýsingarnar til dátagrunnin. Eisini er ein JS fíl \textit{script.js} fyri summar funktónir.
 Tær 4 síðurnar eru:
 \begin{itemize}
@@ -135,6 +136,7 @@ Tær 4 síðurnar eru:
     \item \textit{create\_thread.php} \- Fyri at stovna ein nýggjan tráð.
 \end{itemize}
 
+\subsection{Ansible}
 \par Hesar 6 fílar (og eisini 7nda \textit{favicon.ico} fílin) verða stovnaðir
 av at koyra kommandoina á einari VM við \textit{Ansible}:
 \newline
