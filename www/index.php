@@ -20,19 +20,19 @@ try {
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="gradient-box">
+    <div id="forum" class="forum">
         <div class="small-title">Vælkomin til</div>
         <div class="title">Kjakið</div>
     </div>
-    <ul>
+    <div id="forums-container">
         <?php foreach ($forums as $forum): ?>
-            <li>
-            <a href="view_forum.php?forum_id=<?php echo htmlspecialchars($forum['forum_id']); ?>&forum_name=<?php echo urlencode($forum['forum_name']); ?>">
+            <div class="forum">
+            <a class="forum-link" href="view_forum.php?forum_id=<?php echo htmlspecialchars($forum['forum_id']); ?>&forum_name=<?php echo urlencode($forum['forum_name']); ?>">
                     <?php echo htmlspecialchars($forum['forum_name']); ?>
                 </a>
-                - <?php echo htmlspecialchars($forum['description']); ?>
-            </li>
+                <?php echo htmlspecialchars($forum['description']); ?>
+            </div>
         <?php endforeach; ?>
-    </ul>
+    </div>
 </body>
 </html>
