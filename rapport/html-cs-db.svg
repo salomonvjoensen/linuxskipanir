@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="800"
+   height="100"
+   viewBox="0 0 211.66667 26.45835"
+   version="1.1"
+   id="svg284"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="html-cs-db.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview286"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.0444209"
+     inkscape:cx="308.30482"
+     inkscape:cy="10.532152"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g40" />
+  <defs
+     id="defs281">
+    <rect
+       x="646.29114"
+       y="42.425419"
+       width="133.0881"
+       height="56.781105"
+       id="rect777" />
+    <rect
+       x="341.81622"
+       y="38.197262"
+       width="58.183788"
+       height="32.655396"
+       id="rect771" />
+    <rect
+       x="40.213673"
+       y="36.383797"
+       width="125.42836"
+       height="28.724051"
+       id="rect697" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g40"
+       transform="matrix(0.40624382,0,0,0.43397422,0.20994007,0.20994008)">
+      <path
+         d="m 126.37,30 h 67.26"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path4" />
+      <path
+         d="m 121.12,30 7,-3.5 -1.75,3.5 1.75,3.5 z"
+         fill="#000000"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path6" />
+      <path
+         d="m 198.88,30 -7,3.5 1.75,-3.5 -1.75,-3.5 z"
+         fill="#000000"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path8" />
+      <rect
+         x="0"
+         y="0"
+         width="120"
+         height="60"
+         rx="9"
+         ry="9"
+         fill="#ffffff"
+         stroke="#000000"
+         pointer-events="all"
+         id="rect10" />
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g16" />
+      <path
+         d="m 326.37,30 h 67.26"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path18" />
+      <path
+         d="m 321.12,30 7,-3.5 -1.75,3.5 1.75,3.5 z"
+         fill="#000000"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path20" />
+      <path
+         d="m 398.88,30 -7,3.5 1.75,-3.5 -1.75,-3.5 z"
+         fill="#000000"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path22" />
+      <rect
+         x="200"
+         y="0"
+         width="120"
+         height="60"
+         rx="9"
+         ry="9"
+         fill="#ffffff"
+         stroke="#000000"
+         pointer-events="all"
+         id="rect24" />
+      <rect
+         x="400"
+         y="0"
+         width="120"
+         height="60"
+         rx="9"
+         ry="9"
+         fill="#ffffff"
+         stroke="#000000"
+         pointer-events="all"
+         id="rect32" />
+      <text
+         xml:space="preserve"
+         transform="matrix(0.65129196,0,0,0.60967523,-2.7508206,1.4187052)"
+         id="text695"
+         style="white-space:pre;shape-inside:url(#rect697);fill:#2b0000;stroke-width:2"><tspan
+           x="40.212891"
+           y="55.259736"
+           id="tspan811"><tspan
+             style="font-size:21.3333px;-inkscape-font-specification:'sans-serif, Normal'"
+             id="tspan809">Heimasíða</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         transform="matrix(0.65129196,0,0,0.60967523,23.33087,-0.05467599)"
+         id="text769"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect771);fill:#2b0000;stroke-width:2"><tspan
+           x="341.81641"
+           y="57.072236"
+           id="tspan813">PHP</tspan></text>
+      <text
+         xml:space="preserve"
+         transform="matrix(0.65129196,0,0,0.60967523,2.5153695,-2.5247341)"
+         id="text775"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect777);fill:#2b0000;stroke-width:2"><tspan
+           x="646.29102"
+           y="61.300751"
+           id="tspan815">Databasa</tspan></text>
+    </g>
+    <switch
+       id="switch48"
+       transform="matrix(0.40624382,0,0,0.43397422,0.20994007,0.20994008)">
+      <g
+         requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+         id="g42" />
+      <a
+         transform="translate(0,-5)"
+         xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems"
+         target="_blank"
+         id="a46">
+        <text
+           text-anchor="middle"
+           font-size="10px"
+           x="50%"
+           y="100%"
+           id="text44">Text is not SVG - cannot display</text>
+      </a>
+    </switch>
+  </g>
+</svg>
