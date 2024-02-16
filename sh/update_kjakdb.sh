@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DATABASE='kjakdb'
-MYSQL_ROOT_USER='root'
+MYSQL_ROOT_USER='kjak_user'
 MYSQL_ROOT_PASSWORD='kjak2kjak'
 ANON_USER='anon'
 ANON_PASSWORD='anonbrúkari'
