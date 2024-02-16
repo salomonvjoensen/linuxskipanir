@@ -1,0 +1,142 @@
+/*Home page*/
+.home {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #FAFFFB;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.forum h1 {
+    text-align: center;
+}
+
+
+.forum-link-container {
+    margin-bottom: 20px; /* Spacing before the rest of the forum content */
+    text-align: center; /* Center the link */
+}
+
+.forum-link {
+    display: inline-block; /* Allows setting padding and margins */
+    padding: 10px 20px; /* Padding around the link text */
+    background-color: #B7E4C7; /* Match the button color for consistency */
+    color: #333; /* Text color */
+    border-radius: 15px; /* Rounded corners */
+    text-decoration: none; /* Remove underline from the link */
+    font-size: 1.2rem; /* Larger text for the link */
+    font-weight: bold; /* Make link text bold */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+.forum-link:hover {
+    background-color: #9FD3B8; /* Darker shade on hover for interaction feedback */
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E8F0F2;
+    color: #4A4A4A;
+}
+
+.forum {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #FAFFFB;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#make-post-form {
+
+    padding-bottom: 10px;
+
+}
+
+textarea, input[type="file"] {
+    width: 50%;
+    display: block; /* Ensure block-level element behavior for proper width application */
+    margin: 0 auto 10px; /* Center align the elements and add margin at the bottom */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    min-height: 100px; 
+}
+
+button[type="submit"] {
+    display: block; /* Make button block-level to allow margin auto for centering */
+    width: fit-content; /* Adjust width to fit content */
+    margin: 0 auto; /* Center the button */
+    background-color: #B7E4C7;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #9FD3B8;
+}
+
+
+.post {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDEDEE;
+    border-radius: 8px;
+}
+
+.post-id, .response-id {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-left: 10px;
+}
+
+.post-image, .response-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    cursor: pointer;
+    margin-right: 10px;
+    float: left;
+}
+
+.post, .response {
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+.response {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ECFFEF;
+    border-left: 4px solid #B7E4C7;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    background-color: #B7E4C7;
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #9FD3B8;
+}
