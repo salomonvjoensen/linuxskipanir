@@ -6,20 +6,34 @@
     - name: mysql_user
       prompt: "Enter your desired MySQL username"
       private: no
+      when: not setup_complete
 
     - name: mysql_password
       prompt: "Enter your desired MySQL password"
       private: no
+      when: not setup_complete
 
     - name: anon_user
       prompt: "Enter your conn.php username (kjakdb access)"
       private: no
+      when: not setup_complete
 
     - name: anon_password
       prompt: "Enter your conn.php password (kjakdb access)"
       private: no
+      when: not setup_complete
 
   tasks:
+    - name: Check for setup complete flag file
+      ansible.builtin.stat:
+        path: /var/www/html/.setup_complete 
+      register: setup_flag  # Store the result 
+
+    - name: Initialize setup_complete flag (if file missing)
+      ansible.builtin.set_fact:
+        setup_complete: false 
+      when: not setup_flag.stat.exists 
+  
     - name: Install Apache
       ansible.builtin.apt:
         name: apache2
