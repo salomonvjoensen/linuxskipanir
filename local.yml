@@ -90,8 +90,8 @@
 
     - name: Set root password for MySQL/MariaDB
       ansible.builtin.mysql_user:
-        name: {{ mysql_user }}
-        password: {{ mysql_password }}
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
         login_user: root
         check_implicit_admin: yes
         host_all: yes
@@ -102,13 +102,13 @@
       community.mysql.mysql_db:
         name: kjakdb
         state: present
-        login_user: {{ mysql_user }}
-        login_password: {{ mysql_password }}
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
 
     - name: Ensure the kjakdb user exists with privileges
       ansible.builtin.mysql_user:
-        name: {{ mysql_user }}
-        password: {{ mysql_password }}
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
         priv: 'kjakdb.*:ALL'
         state: present
         when: not setup_complete
