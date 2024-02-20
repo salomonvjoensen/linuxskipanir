@@ -1,6 +1,24 @@
 ---
 - hosts: localhost
   become: yes
+
+  vars_prompt:
+    - name: mysql_user
+      prompt: "Enter your desired MySQL username"
+      private: no
+
+    - name: mysql_password
+      prompt: "Enter your desired MySQL password"
+      private: no
+
+    - name: anon_user
+      prompt: "Enter your conn.php username (kjakdb access)"
+      private: no
+
+    - name: anon_password
+      prompt: "Enter your conn.php password (kjakdb access)"
+      private: no
+
   tasks:
     - name: Install Apache
       ansible.builtin.apt:
@@ -20,45 +38,23 @@
         group: root
         mode: '0777'
 
-    - name: Copy index.php
+    - name: Copy web files
       ansible.builtin.copy:
-        src: www/index.php
-        dest: /var/www/html/index.php
+        src: "www/{{ item }}"
+        dest: /var/www/html/{{ item }} 
+      with_items:
+        - index.php
+        - favicon.ico
+        - style.css
+        - script.js
+        - create_thread.php
+        - view_forum.php
+        - view_thread.php
 
-    - name: Copy favicon.ico
-      ansible.builtin.copy:
-        src: www/favicon.ico
-        dest: /var/www/html/favicon.ico
-
-    - name: Copy style.css
-      ansible.builtin.copy:
-        src: www/style.css
-        dest: /var/www/html/style.css
-
-    - name: Copy script.js
-      ansible.builtin.copy:
-        src: www/scrpt.js
-        dest: /var/www/html/script.js
-
-    - name: Copy conn.php
-      ansible.builtin.copy:
-        src: www/conn.php
-        dest: /var/www/html/conn.php
-
-    - name: Copy create_thread.php
-      ansible.builtin.copy:
-        src: www/create_thread.php
-        dest: /var/www/html/create_thread.php
-
-    - name: Copy view_forum.php
-      ansible.builtin.copy:
-        src: www/view_forum.php
-        dest: /var/www/html/view_forum.php
-
-    - name: Copy view_thread.php
-      ansible.builtin.copy:
-        src: www/view_thread.php
-        dest: /var/www/html/view_thread.php
+    - name: Create conn.php from template
+      ansible.builtin.template:
+        src: www/conn.php.j2
+        dest: /var/www/html/conn.php 
 
     - name: Install MariaDB server
       ansible.builtin.apt:
@@ -86,33 +82,36 @@
         dest: "~/.my.cnf"
         content: |
           [client]
-          user=kjak_user
-          password=kjak2kjak
+          user={{ mysql_user }}
+          password={{ mysql_password }}
         mode: '0600'
+      when: not setup_complete  
       become: yes
 
     - name: Set root password for MySQL/MariaDB
       ansible.builtin.mysql_user:
-        name: kjak_user
-        password: kjak2kjak
+        name: {{ mysql_user }}
+        password: {{ mysql_password }}
         login_user: root
         check_implicit_admin: yes
         host_all: yes
+      when: not setup_complete  
       become: yes
 
     - name: Ensure the database 'kjakdb' exists
-      ansible.builtin.mysql_db:
+      community.mysql.mysql_db:
         name: kjakdb
         state: present
-        login_user: kjak_user
-        login_password: kjak2kjak
+        login_user: {{ mysql_user }}
+        login_password: {{ mysql_password }}
 
     - name: Ensure the kjakdb user exists with privileges
       ansible.builtin.mysql_user:
-        name: kjak_user
-        password: kjak2kjak
+        name: {{ mysql_user }}
+        password: {{ mysql_password }}
         priv: 'kjakdb.*:ALL'
         state: present
+        when: not setup_complete
       become: yes
 
     - name: Copy SQL script to target machine
@@ -127,12 +126,25 @@
         target: /tmp/kjakdb.sql
       become: yes
 
-    - name: Copy check and update script on kjakdb
-      ansible.builtin.copy:
-        src: sh/update_kjakdb.sh
+    - name: Create update script from template
+      ansible.builtin.template:
+        src: sh/update_kjakdb.sh.j2
         dest: /tmp/update_kjakdb.sh
-        mode: '0755'
+        mode: '0755' 
 
-    - name: Execute the update script on kjakdb
+    - name: Execute the update script
       ansible.builtin.command:
         cmd: /tmp/update_kjakdb.sh
+      when: not setup_complete
+      become: yes
+
+    - name: Create state file after initial setup
+      ansible.builtin.file:
+        path: /var/www/html/.setup_complete 
+        state: touch
+        mode: '0644' 
+      when: not setup_complete
+
+    - name: Set initial setup flag 
+      ansible.builtin.set_fact:
+        setup_complete: true
