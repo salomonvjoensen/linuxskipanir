@@ -112,7 +112,6 @@
       ansible.builtin.mysql_user:
         name: "{{ mysql_user }}"
         password: "{{ mysql_password }}"
-        login_user: root
         check_implicit_admin: yes
         host_all: yes
       when: not setup_complete  
@@ -130,6 +129,7 @@
         name: "{{ mysql_user }}"
         password: "{{ mysql_password }}"
         priv: 'kjakdb.*:ALL'
+        host: localhost
         state: present
         when: not setup_complete
       become: yes
