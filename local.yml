@@ -14,23 +14,30 @@
       when: not setup_flag.stat.exists 
 
     - name: Gather credentials (if setup incomplete)
-      block:  
-        - vars_prompt:
-          - name: mysql_user
-            prompt: "Enter your desired MySQL username"
-            private: no
+      block:
+      - pause:
+          prompt: "Enter your desired MySQL username"
+        register: mysql_credentials
+      - set_fact: 
+          mysql_user: "{{ mysql_credentials.user_input }}"
 
-          - name: mysql_password
-            prompt: "Enter your desired MySQL password"
-            private: no
+      - pause:
+          prompt: "Enter your desired MySQL password"
+        register: mysql_password
+      - set_fact: 
+          mysql_password: "{{ mysql_password.user_input }}"
 
-          - name: anon_user
-            prompt: "Enter your conn.php username (kjakdb access)"
-            private: no
+      - pause:
+          prompt: "Enter your desired kjakdb username"
+        register: anon_user_credentials
+      - set_fact: 
+          anon_user: "{{ anon_user_credentials.user_input }}"
 
-          - name: anon_password
-            prompt: "Enter your conn.php password (kjakdb access)"
-            private: no
+      - pause:
+          prompt: "Enter your desired kjakdb user password"
+        register: anon_password
+      - set_fact: 
+          anon_password: "{{ anon_password.user_input }}"
       when: not setup_complete
 
     - name: Install Apache
