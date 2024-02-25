@@ -102,7 +102,7 @@
         dest: "~/.my.cnf"
         content: |
           [client]
-          user={{ mysql_user }}
+          user=root
           password={{ mysql_password }}
         mode: '0600'
       when: not setup_complete  
