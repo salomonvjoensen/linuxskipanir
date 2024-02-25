@@ -8,10 +8,9 @@
         path: /var/www/html/.setup_complete 
       register: setup_flag  # Store the result 
 
-    - name: Initialize setup_complete flag (if file missing)
+    - name: Initialize setup_complete flag (true if missing)
       ansible.builtin.set_fact:
-        setup_complete: false 
-      when: not setup_flag.stat.exists 
+        setup_complete: "{{ setup_flag.stat.exists }}"
 
     - name: Gather credentials (if setup incomplete)
       block:
