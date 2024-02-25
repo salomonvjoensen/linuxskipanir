@@ -15,29 +15,29 @@
 
     - name: Gather credentials (if setup incomplete)
       block:
-      - pause:
-          prompt: "Enter your desired MySQL username"
-        register: mysql_credentials
-      - set_fact: 
-          mysql_user: "{{ mysql_credentials.user_input }}"
+        - pause:
+            prompt: "Enter your desired MySQL username"
+          register: mysql_credentials
+        - set_fact: 
+            mysql_user: "{{ mysql_credentials.user_input }}"
 
-      - pause:
-          prompt: "Enter your desired MySQL password"
-        register: mysql_password
-      - set_fact: 
-          mysql_password: "{{ mysql_password.user_input }}"
+        - pause:
+            prompt: "Enter your desired MySQL password"
+          register: mysql_password
+        - set_fact: 
+            mysql_password: "{{ mysql_password.user_input }}"
 
-      - pause:
-          prompt: "Enter your desired kjakdb username"
-        register: anon_user_credentials
-      - set_fact: 
-          anon_user: "{{ anon_user_credentials.user_input }}"
+        - pause:
+            prompt: "Enter your desired kjakdb username"
+          register: anon_user_credentials
+        - set_fact: 
+            anon_user: "{{ anon_user_credentials.user_input }}"
 
-      - pause:
-          prompt: "Enter your desired kjakdb user password"
-        register: anon_password
-      - set_fact: 
-          anon_password: "{{ anon_password.user_input }}"
+        - pause:
+            prompt: "Enter your desired kjakdb user password"
+          register: anon_password
+        - set_fact: 
+            anon_password: "{{ anon_password.user_input }}"
       when: not setup_complete
 
     - name: Install Apache
