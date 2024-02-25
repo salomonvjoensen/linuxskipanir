@@ -118,7 +118,7 @@
       become: yes
 
     - name: Ensure the database 'kjakdb' exists
-      community.mysql.mysql_db:
+      ansible.builtin.mysql_db:
         name: kjakdb
         state: present
         login_user: "{{ mysql_user }}"
