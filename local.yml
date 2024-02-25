@@ -102,7 +102,7 @@
         dest: "~/.my.cnf"
         content: |
           [client]
-          user=root
+          user={{ mysql_user }}
           password={{ mysql_password }}
         mode: '0600'
       when: not setup_complete  
@@ -131,7 +131,7 @@
         priv: 'kjakdb.*:ALL'
         host: localhost
         state: present
-        when: not setup_complete
+      when: not setup_complete
       become: yes
 
     - name: Copy SQL script to target machine
