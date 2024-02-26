@@ -85,7 +85,8 @@
     - name: Create conn.php from template
       ansible.builtin.template:
         src: www/conn.php.j2
-        dest: /var/www/html/conn.php 
+        dest: /var/www/html/conn.php
+      when: not setup_complete
 
     - name: Install MariaDB server
       ansible.builtin.apt:
