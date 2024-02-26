@@ -20,6 +20,21 @@ ensure_user_exists() {
   fi
 }
 
+# Function to create a single table 
+create_table() {
+  local table_name=$1
+  local columns=$2  # Example: "forum_id int(11) NOT NULL AUTO_INCREMENT, forum_name varchar(255) NOT NULL, description text DEFAULT NULL, created_at timestamp NOT NULL DEFAULT current_timestamp()"
+  local primary_key=$3
+
+  echo "Checking if table $table_name exists..."
+  if ! mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -sse "SHOW TABLES LIKE '$table_name';" | grep -q "$table_name"; then
+    echo "Creating table $table_name..."
+    mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "CREATE TABLE $table_name ($columns, PRIMARY KEY ($primary_key));"
+  else
+    echo "Table $table_name already exists."
+  fi
+}
+
 # Grant permissions to user
 grant_permissions() {
   local user=$1
@@ -104,6 +119,11 @@ grant_permissions "$ANON_USER" "$DATABASE" "*" "SELECT"
 grant_permissions "$ANON_USER" "$DATABASE" "kjak_thread" "INSERT, UPDATE"
 grant_permissions "$ANON_USER" "$DATABASE" "kjak_post" "INSERT, UPDATE"
 
+# Create the tables idempotently
+create_table 'kjak_table' 'forum_id int(11) NOT NULL AUTO_INCREMENT, forum_name varchar(255) NOT NULL, description text DEFAULT NULL, created_at timestamp NOT NULL DEFAULT current_timestamp()' 'forum_id'
+create_table 'kjak_thread' 'thread_id int(11) NOT NULL AUTO_INCREMENT, forum_id int(11) DEFAULT NULL, thread_title varchar(255) NOT NULL, created_at timestamp NOT NULL DEFAULT current_timestamp()' 'thread_id'
+create_table 'kjak_post' 'post_id int(11) NOT NULL AUTO_INCREMENT, thread_id int(11) DEFAULT NULL, author_name varchar(255) DEFAULT NULL, post_text text NOT NULL, post_image varchar(255) DEFAULT NULL, created_at timestamp NOT NULL DEFAULT current_timestamp()' 'post_id'
+
 # Add primary keys, indexes, and set auto-increment
 add_primary_key_and_index 'kjak_post' 'post_id' 'thread_id'
 add_primary_key_and_index 'kjak_table' 'forum_id'
@@ -116,3 +136,23 @@ set_auto_increment 'kjak_thread' 'thread_id'
 # Add foreign keys
 add_foreign_key 'kjak_post' 'kjak_post_ibfk_1' 'thread_id' 'kjak_thread(thread_id)'
 add_foreign_key 'kjak_thread' 'kjak_thread_ibfk_1' 'forum_id' 'kjak_table(forum_id)'
+
+# Insert the forum data if it doesn't exist
+mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "INSERT INTO kjak_table (forum_name, description)
+SELECT * FROM (SELECT 'Tíðindir', 'Hvat nýtt veitst tú?') AS tmp
+WHERE NOT EXISTS (
+  SELECT forum_name FROM kjak_table WHERE forum_name = 'Tíðindir'
+) LIMIT 1;
+
+INSERT INTO kjak_table (forum_name, description)
+SELECT * FROM (SELECT 'Kjak', 'Kjak um hvat sum helst.') AS tmp
+WHERE NOT EXISTS (
+  SELECT forum_name FROM kjak_table WHERE forum_name = 'Kjak'
+) LIMIT 1;
+
+INSERT INTO kjak_table (forum_name, description)
+SELECT * FROM (SELECT 'Áhugi', 'Lat heimin vita um tíni áhugamál.') AS tmp
+WHERE NOT EXISTS (
+  SELECT forum_name FROM kjak_table WHERE forum_name = 'Áhugi'
+) LIMIT 1;
+"
