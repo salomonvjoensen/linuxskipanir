@@ -69,6 +69,11 @@
         group: root
         mode: '0777'
 
+    - name: Remove index.html
+      ansible.builtin.file:
+        path: /var/www/html/index.html
+        state: absent
+
     - name: Copy web files
       ansible.builtin.copy:
         src: "www/{{ item }}"
