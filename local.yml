@@ -160,13 +160,13 @@
       ansible.builtin.template:
         src: sh/update_kjakdb.sh.j2
         dest: /tmp/update_kjakdb.sh
-        mode: '0755' 
+        mode: '0755'
+      when: not setup_complete
 
     - name: Execute the update script
       ansible.builtin.command:
         cmd: /tmp/update_kjakdb.sh
       when: not setup_complete
-      become: yes
 
     - name: Create state file after initial setup
       ansible.builtin.file:
