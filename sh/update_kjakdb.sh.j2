@@ -44,10 +44,10 @@ add_primary_key_and_index() {
     mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "ALTER TABLE $table ADD PRIMARY KEY ($primary_key);" || {
          # Handle duplicate key error (MySQL error code 1062)
          if [[ $? -eq 1062 ]]; then 
-             echo "Primary key ($primary_key) already exists in $table."
+             echo "Error adding primary key to $table: Duplicate Entry '0' for key 'PRIMARY'" 
          else
              # Re-raise the error if it's something else
-             echo "Error setting primary key: $?" 
+             echo "Error setting primary key in $table: $?" 
              exit 1
          fi 
      }
