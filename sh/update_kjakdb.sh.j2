@@ -41,7 +41,16 @@ add_primary_key_and_index() {
   echo "Checking primary key for table $table..."
   if ! mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -sse "SHOW KEYS FROM $table WHERE Key_name = 'PRIMARY';" | grep -q 'PRIMARY'; then
     echo "Adding primary key ($primary_key) to $table..."
-    mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "ALTER TABLE $table ADD PRIMARY KEY ($primary_key);"
+    mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "ALTER TABLE $table ADD PRIMARY KEY ($primary_key);" || {
+         # Handle duplicate key error (MySQL error code 1062)
+         if [[ $? -eq 1062 ]]; then 
+             echo "Primary key ($primary_key) already exists in $table."
+         else
+             # Re-raise the error if it's something else
+             echo "Error setting primary key: $?" 
+             exit 1
+         fi 
+     }
   else
     echo "Primary key ($primary_key) already exists in $table."
   fi
@@ -75,13 +84,18 @@ add_foreign_key() {
   fi
 }
 
-# Function to set AUTO_INCREMENT
+# Function to check and set AUTO_INCREMENT
 set_auto_increment() {
   local table=$1
   local column=$2
 
-  echo "Setting AUTO_INCREMENT for $column in $table..."
-  mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "ALTER TABLE $table MODIFY $column int(11) NOT NULL AUTO_INCREMENT;"
+   # Check if AUTO_INCREMENT is already set with desired value
+   if mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D information_schema -sse "SELECT AUTO_INCREMENT FROM TABLES WHERE TABLE_SCHEMA = '$DATABASE' AND TABLE_NAME = '$table' AND COLUMN_NAME = '$column'" | grep -q [desired_starting_value]; then
+       echo "$column in $table is already set to AUTO_INCREMENT with desired value."
+   else
+      echo "Setting AUTO_INCREMENT for $column in $table..."
+      mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "ALTER TABLE $table MODIFY $column int(11) NOT NULL AUTO_INCREMENT;"
+   fi
 }
 
 # Ensure 'anon' user exists and grant permissions
