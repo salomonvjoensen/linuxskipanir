@@ -132,6 +132,17 @@
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
 
+    - name: Ensure the kjakdb user exists with privileges
+      ansible.builtin.mysql_user:
+        login_user: root
+        login_password: "{{ mysql_password }}"      
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
+        priv: 'kjakdb.*:ALL'
+        host: localhost
+        state: present
+      when: not setup_complete
+
     - name: Copy SQL script to target machine
       ansible.builtin.copy:
         src: sql/kjakdb.sql
