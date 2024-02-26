@@ -96,6 +96,25 @@
         name: PyMySQL
         state: present
 
+    - name: Set MySQL root password
+      ansible.builtin.shell: |
+        mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('{{ mysql_password }}');"
+      args:
+        executable: /bin/bash
+      when: not setup_complete
+
+    - name: Set password for MySQL user (including root)  
+      ansible.builtin.mysql_user:
+        login_user: root
+        login_password: "{{ mysql_password }}"
+        check_implicit_admin: true
+#        login_unix_socket: /var/lib/mysql/mysql.sock
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
+        priv: "*.*:ALL"
+        host: localhost
+      when: not setup_complete
+
     - name: Create .my.cnf for MySQL authentication
       ansible.builtin.copy:
         dest: "~/.my.cnf"
@@ -105,16 +124,6 @@
           password={{ mysql_password }}
         mode: '0600'
       when: not setup_complete  
-      become: yes
-
-    - name: Set root password for MySQL/MariaDB
-      ansible.builtin.mysql_user:
-        name: "{{ mysql_user }}"
-        password: "{{ mysql_password }}"
-        check_implicit_admin: yes
-        host_all: yes
-      when: not setup_complete  
-      become: yes
 
     - name: Ensure the database 'kjakdb' exists
       ansible.builtin.mysql_db:
@@ -122,16 +131,6 @@
         state: present
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
-
-    - name: Ensure the kjakdb user exists with privileges
-      ansible.builtin.mysql_user:
-        name: "{{ mysql_user }}"
-        password: "{{ mysql_password }}"
-        priv: 'kjakdb.*:ALL'
-        host: localhost
-        state: present
-      when: not setup_complete
-      become: yes
 
     - name: Copy SQL script to target machine
       ansible.builtin.copy:
