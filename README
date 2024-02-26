@@ -1,1 +1,6 @@
-You need to have Ansible installed to create the Forum.
+You can pull from this repository with Ansible, to create the Forum on a Linux/Ubuntu environment.
+
+You will prompted for MySQL username and password,
+and for kjakdb database username and password, when pulling from this repository with Ansible.
+
+Last updated: 26. Feb. 2024
