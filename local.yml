@@ -51,6 +51,11 @@
           - libapache2-mod-php
         state: present
 
+    - name: Install PHP MySQL extension
+      ansible.builtin.apt:
+        name: php-mysql
+        state: present
+
     - name: Restart Apache (to load PHP module)
       ansible.builtin.service:
         name: apache2
@@ -149,18 +154,6 @@
         host: localhost
         state: present
       when: not setup_complete
-
-    # - name: Copy SQL script to target machine
-    #   ansible.builtin.copy:
-    #     src: sql/kjakdb.sql
-    #     dest: /tmp/kjakdb.sql
-
-    # - name: Import SQL script into kjakdb database
-    #   ansible.builtin.mysql_db:
-    #     name: kjakdb
-    #     state: import
-    #     target: /tmp/kjakdb.sql
-    #   become: yes
 
     - name: Create update script from template
       ansible.builtin.template:
