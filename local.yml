@@ -144,6 +144,7 @@
         state: present
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
+      when: not setup_complete
 
     - name: Ensure the kjakdb user exists with privileges
       ansible.builtin.mysql_user:
