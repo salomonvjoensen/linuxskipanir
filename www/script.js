@@ -72,7 +72,7 @@ function setupImageToggle() {
       image.addEventListener('click', function() {
         if (this.style.width === '150px') {
           // Restore original size
-          this.style.width = '500px'; // Reset to default
+          this.style.maxWidth = '500px'; // Reset to default
           this.style.height = '';  // Reset to default
         } else {
           // Set to 150px
