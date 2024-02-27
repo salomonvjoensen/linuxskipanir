@@ -87,8 +87,8 @@ men er ikki partur av Ansible playbook, tí tað er ikki neyðugt fyri at fáa k
 at virka.
 \par HTML verður brúkt til at leggja grund til útsjóndina, og so at PHP og JS kunnu peika
 til ávis støð tá heimasíðan verður bygt. CSS verður nýtt til at pynta á HTML, fyri at fáa eina
-pena og lesiliga heimasíðu. JS verður nýtt fyri at fáa funktionalitet sum at goyma og víðka
-tráðir, minka og forstørra myndir. PHP verður brúkt til at dynamiskt byggja lutir av
+pena og lesiliga heimasíðu. JS verður nýtt fyri at fáa funktionalitet minka og forstørra myndir,
+og vísa/fjala svar formular. PHP verður brúkt til at dynamiskt byggja lutir av
 heimasíðuni, sum t.d. postar, svør og tráðir.
 
 \section{Lýsing av Loysn}
@@ -98,7 +98,8 @@ heimasíðuni, sum t.d. postar, svør og tráðir.
 velur tað forum teimum ynskir, og verður síðani koyrdur har til. Á kjakforum kunnu tey
 hyggja gjøgnum postar, síggja svør og fara ígjøgnum tráðir, samt sum at leggja egnir postir
 út ella leggja svar til aðrar postir og onnur svør. Fyri at síggja øll svør má brúkarin fara inn
-á postin, og um hann ynskir at síggja tráðir undir svørum til postin trýstir hann á "vís tráð".
+á postin, og um hann ynskir at síggja tráðir undir svørum til postin trýstir hann á ein tráð
+fyri at síggja tann tráðin, og mesta lagið vera víst 10 tráðir per forum og 10 svør per tráð.
 Litir eru valdir fyri at geva brúkarinum eina róliga kenslu, og grønt er ofta sett í samband
 við ró. Stórar yvirskriftir og stórir knappar eru valdir fyri at vera lættir at lesa. 
 
@@ -177,9 +178,6 @@ bróta uppá nakað ella gera óneyðug kopiir):
  Aftaná kann man opna \underline{localhost} í ein kagara og Kjak heimasíðan er uppi
  og koyrir.
 
- \par Seinni kann man tillaga ting, so sum brúkarnar \textit{kjak\_user} og \textit{anon}
-í \textbf{MariaDB} og dagføra tilsvarandi \textit{conn.php} fílina til teir brúkarnar.
-
 
 \section{Perspektivisering}
 \par Heimasíðan hevur tað mest einklu treytirnar fyri at vera hugsa sum ein kjak-heimasíða,
@@ -189,6 +187,7 @@ kundi verið at vitjandi kundu stovna brúkarar (um tey vildu), so tey sjálvu k
 teirra egnu tráðir og svør. Ting sum at indeksera heimasíðuna, so man kundi leita uppá
 dátagrunnin kundi eisini verið implementera.
 \par Tað er skjótt at fáa heimasíðuna upp at koyra bara við einari einklari bash kommandoina,
+og 4 promptir har man kann seta sjálv(ur) hvat fyri brúkaranøvn og kodir man vil brúka,
 givið man hevur \textbf{Ansible} á einum
 Linux líknandi umhvørvi (vit brúktu Ubuntu Server VM), og tað vísur eisini styrkina í \textbf{Ansible}.
 \par Vit hugsaðu um at brúka \textbf{Ansible Playbook}, so man kundi havt forriti koyrt á 
