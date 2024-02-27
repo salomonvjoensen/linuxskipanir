@@ -113,25 +113,12 @@ function toggleReplyForm() {
     }
 }
 
-    // Function to navigate back based on the current page context
+// Function to navigate back based on the current page context
 function goBackStructured() {
-    // Example of determining the current context
-    // This could be set based on the page's content, URL, or a data attribute
-    var currentPageContext = document.body.getAttribute('data-page-context');
-
-    let backUrl = '/'; // Default to home if no context is found
-
-    // Map the current context to the parent page URL
-    switch(currentPageContext) {
-        case 'post':
-            backUrl = '/view_forum'; // URL to go back to the Forum from a Post
-            break;
-        case 'view_forum':
-            backUrl = '/'; // URL to go back to Home from the Forum
-            break;
-        // Add more cases as necessary for other contexts
-        }
+    const currentURL = window.location.href;
+    const urlSearchParams = new URLSearchParams(currentURL.split('?')[1]);
+    const forumId = urlSearchParams.get("forum_id");
 
     // Navigate to the determined URL
-    window.location.href = backUrl;
+    window.location.href = "view_forum.php?forum_id=" + forumId;
     }
