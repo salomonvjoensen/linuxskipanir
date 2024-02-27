@@ -102,6 +102,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" type="text/css" href="style.css">
     <title><?php echo htmlspecialchars($forum_name); ?></title>
 </head>
+<div class="nav-bar">
+    <!-- "Go Back" Button -->
+    <a href="#" onclick="goBackStructured()">Go Back</a>
+</div>
 <body>
     <div id="forum" class="forum">
         <div class="small-title">Forum:</div>

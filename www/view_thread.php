@@ -104,6 +104,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
     <title><?php echo htmlspecialchars($thread['thread_title'] ?? 'Thread'); ?></title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+<div class="nav-bar">
+    <!-- "Go Back" Button -->
+    <a href="#" onclick="goBackStructured()">Go Back</a>
+</div>
 <body>
     <div id="forum" class="forum">
         <div class="small-title">Tráður:</div>

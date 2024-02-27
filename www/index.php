@@ -19,6 +19,12 @@ try {
     <title>Kjakið</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
+<div class="nav-bar">
+    <!-- "Go Back" Button -->
+    <a href="#" onclick="goBackStructured()">Go Back</a>
+</div>
+
 <body>
     <div id="forum" class="forum">
         <div class="small-title">Vælkomin til</div>
