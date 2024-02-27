@@ -21,8 +21,7 @@ try {
 </head>
 
 <div class="nav-bar">
-    <!-- "Go Back" Button -->
-    <a href="#" onclick="goBackStructured()">Go Back</a>
+    
 </div>
 
 <body>

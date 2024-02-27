@@ -2,6 +2,7 @@
 include 'conn.php'; // Include your database connection
 
 $thread_id = isset($_GET['thread_id']) ? (int)$_GET['thread_id'] : 0;
+$forum_id = $_GET['forum_id'];
 
 // Fetch thread details (optional, if you want to display thread title or other info)
 try {
@@ -106,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
 </head>
 <div class="nav-bar">
     <!-- "Go Back" Button -->
-    <a href="#" onclick="goBackStructured()">Go Back</a>
+    <button onclick="goBackStructured()">Go Back</button>
 </div>
 <body>
     <div id="forum" class="forum">
@@ -131,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
         <div>
             Síða: 
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="?thread_id=<?php echo $thread_id; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            <a href="?thread_id=<?php echo $thread_id; ?>&forum_id=<?php echo htmlspecialchars($forum_id); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
         <?php endfor; ?>
         </div>
     </nav>

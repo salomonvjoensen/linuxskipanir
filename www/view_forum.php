@@ -3,7 +3,7 @@ include 'conn.php'; // Include your database connection
 
 $forum_id = isset($_GET['forum_id']) ? (int)$_GET['forum_id'] : 0;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$threadsPerPage = 20;
+$threadsPerPage = 10;
 $offset = ($page - 1) * $threadsPerPage;
 
 try {
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <div class="nav-bar">
     <!-- "Go Back" Button -->
-    <a href="#" onclick="goBackStructured()">Go Back</a>
+    <button onclick="window.location.href='index.php'">Go Back</button>
 </div>
 <body>
     <div id="forum" class="forum">
@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <?php foreach ($threads as $thread): ?>
         <div class="thread">
-            <a href="view_thread.php?thread_id=<?php echo htmlspecialchars($thread['thread_id']); ?>">
+            <a href="view_thread.php?thread_id=<?php echo htmlspecialchars($thread['thread_id']); ?>&forum_id=<?php echo htmlspecialchars($forum_id); ?>">
                 <?php echo htmlspecialchars($thread['thread_title']); ?>
             </a>
             - <?php echo htmlspecialchars($thread['created_at']); ?>
