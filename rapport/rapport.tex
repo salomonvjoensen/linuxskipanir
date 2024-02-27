@@ -24,16 +24,18 @@
 \section{Samandrátt (Abstract)}
 \par Í hesum rapporti stendur hvussu vit gjørdu eina kjak heimasíðu, hvat fyri tólmenni
 (harímillum Ansible, Apache2, MariaDB og PHP) vit brúktu og hvussu arkitektururin var uppbygdur
-til at fremja hetta í verki. Eisini verður hugdi at hvussu front-síðan av heimasíðuni verður tillagur, 
-so at tað er lætt atkomiligt og gevur brúkarinum yvirlit av heimasíðuni.
-til at fremja hetta í verki. Eisini verður hugdi at hvussu front-síðan av heimasíðuni verður tillagur, 
+til at fremja hetta í verki. Eisini hugdi vit at hvussu front-síðan av heimasíðuni verður tillagur, 
 so at tað er lætt atkomiligt og gevur brúkarinum yvirlit av heimasíðuni.
 
 \section{Trupulleika-orðing}
 \par Hvussu ger man eina kjak heimasíðu sum fólk kunnu vitja og stovna tráðir og leggja innlegg í? 
 Og møguliga eisini hava møguleika at deila media har? 
 \begin{itemize}
-    \item Man má gera sær greitt at har má vera ein heimasíða, sum fólk vitja.
+    \item Man má gera sær greitt at har má vera ein heimasíða, sum fólk kunnu vitja.
+    \item Har má vera ein \textit{backend} har ein dátagrunnur er.
+    \item Har má vera eitt \textit{millumlið} sum tulkar millum \textit{backend}
+            og \textit{frontend} (t.v.s. heimasíðan).
+    \item Har má vera ein \textit{frontend} sum er brúkaraflatan fyri kjak heimasíðuna.
 \end{itemize}
 
 \section{Mál}
@@ -55,7 +57,7 @@ Og møguliga eisini hava møguleika at deila media har?
 \begin{itemize}
     \item Arkitektur bygnaða av probleminum og hvussu tað fer at síggja út.
     \item Gera ein databasa í MariaDB har man kann stovna ein \textit{thread} í 3 ymiskum kjakforum har fólk kunna svara uppá.
-    \item Við einum fullfíggjaðum MariaDB datagrunn byggja eina heimasíðu sum virkar sum eitt \textit{interface} millum heimasíðuna og datagrunnin.
+    \item Við einum fullfíggjaðum MariaDB datagrunn, byggja eina heimasíðu sum virkar sum eitt \textit{interface} millum heimasíðuna og datagrunnin.
     \item \textit{Business logic} millumlið verður brúkt PHP til samskifting millum
             \newline heimasíðuna og MariaDB.
     \item Millumliðið fer at avgera hvussu úrslit frá datagrunninum verður víst.    
@@ -126,7 +128,8 @@ til \textbf{kjak\_post}.
 \par Heimasíðan er bert 4 síður við embeddaða PHP kodu til at vísa dáta frá \textit{kjakdb}
 dátagrunnins 3 tabellir. Annars er ein CSS fíl \textit{style.css} fyri uppseting
 og ein \textit{conn.php} við
-íbinding upplýsingarnar til dátagrunnin. Eisini er ein JS fíl \textit{script.js} fyri summar funktónir.
+íbinding upplýsingarnar til dátagrunnin. Eisini er ein JS fíl \textit{script.js}
+fyri interaktivar funktónir.
 Tær 4 síðurnar eru:
 \begin{itemize}
     \item \textit{index.php} \- Heimasíðan sum vísur forumini.
@@ -137,7 +140,7 @@ Tær 4 síðurnar eru:
 \end{itemize}
 
 \subsection{Ansible}
-\par Hesar 6 fílar (og eisini 7nda \textit{favicon.ico} fílin) verða stovnaðir
+\par Hesar 7 fílar (og eisini 8nda \textit{favicon.ico} fílin) verða stovnaðir
 av at koyra kommandoina á einari VM við \textit{Ansible}:
 \newline
 \newline
@@ -147,15 +150,28 @@ av at koyra kommandoina á einari VM við \textit{Ansible}:
 repository sum ger her hesu trin idempotentli (t.v.s. kann vera endurtikið uttan at
 bróta uppá nakað ella gera óneyðug kopiir):
 \begin{itemize}
-    \item Installerar Apache2, startar Apache2.
+    \item Promptar brúkaran fyri -
+    \begin{itemize}
+        \item MySQL brúkaranavn.
+        \item MySQL kodu.
+        \item kjakdb brúkaranavn.
+        \item kjakdb kodu.
+    \end{itemize}
+    \item Installerar Apache2 og relevant PHP og MySQL modulir, startar Apache2.
     \item Ger eina \textit{uploads} mappu í \textit{/var/www/html/uploads}
+    \item Fjernar Apache2 standard \textit{index.html} fíluna (um hon er til).
     \item Tær 7 fílir kopieraðar yvir til \textit{html} mappuna.
+    \item \textit{conn.php.j2} template fílin við kjakdb brúkaranavn
+            og kodu verður framleitt og stovna.
     \item \textbf{MariaDB} tænasta verður stovna og byrja.
     \item \textbf{Pip} og \textbf{PyMySQL} verða installera.
+    \item Stovna \textit{MySQL brúkaran} og \textit{root brúkaran} (við sama MySQL kodu)
     \item Stovna \textit{kjakdb} dátagrunnin.
-    \item Stovna \textit{kjak\_user} brúkaran fyri dátagrunnin.
-    \item Koyra SQL script á dátagrunnin fyri at gera tær neyðugu tabellirnar.
-    \item Til seinast koyra eitt \textit{bash} script til at dagføra dátagrunnin.
+    \item Stovna \textit{kjakdb brúkaran} fyri dátagrunnin.
+    \item Koyra eitt \textit{bash} script til at dagføra dátagrunnin
+            við teim 3 tabellir og 3 forum INSERT.
+    \item Seinast seta eitt \textit{setup flag} til, so man verður ikki promptaður eina
+            aðru ferð man koyrir hesa \textbf{Ansible playbook}.
 \end{itemize}
 
  Aftaná kann man opna \underline{localhost} í ein kagara og Kjak heimasíðan er uppi
@@ -213,11 +229,12 @@ vøkur út.
 \includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{local.yml.pdf}
 
 \phantomsection 
-\addcontentsline{toc}{subsection}{kjakdb.sql}
-\includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{kjakdb.sql.pdf}
+\addcontentsline{toc}{subsection}{update\_kjakdb.sh.j2}
+\includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{update_kjakdb.sh.j2.pdf}
 
-\phantomsection 
-\addcontentsline{toc}{subsection}{update\_kjakdb.sh}
-\includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{update_kjakdb.sh.pdf}
+\phantomsection
+\addcontentsline{toc}{subsection}{conn.php.j2.pdf}
+\includepdf[pages=-, pagecommand={\thispagestyle{plain}}]{conn.php.j2.pdf}
+
 
 \end{document}
