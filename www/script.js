@@ -66,18 +66,15 @@ function toggleResponses(button) {
 function setupImageToggle() {
     document.querySelectorAll('.post-image, .response-image').forEach(image => {
         // initially set to 150px
-        image.style.width = '150px';
-        // image.style.height = '150px';
+        image.style.maxWidth = '150px';
 
       image.addEventListener('click', function() {
         if (this.style.width === '150px') {
           // Restore original size
-          this.style.maxWidth = '500px'; // Reset to default
-          this.style.height = '';  // Reset to default
+          this.style.maxWidth = '500px';
         } else {
           // Set to 150px
-          this.style.width = '150px';
-          //this.style.height = '150px';
+          this.style.maxWidth = '150px';
         }
       });
     });
