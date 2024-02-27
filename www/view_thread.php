@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
     <?php foreach ($posts as $post): ?>
         <div class="post">
             <p><?php if ($post['post_image']): ?>
-                <img src="<?php echo htmlspecialchars($post['post_image']); ?>" class="post-image" alt="Post Image" style="width: 150px;">
+                <img src="<?php echo htmlspecialchars($post['post_image']); ?>" class="post-image" alt="Post Image" style="max-width: 150px;">
                 <?php endif; ?>
                 <h2><?php echo htmlspecialchars($post['author_name']); ?></h2>
                 <p><?php echo nl2br(htmlspecialchars($post['post_text'])); ?></p>
