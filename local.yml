@@ -69,17 +69,11 @@
         group: root
         mode: '0777'
 
-    - name: Check if index.html exists
-      ansible.builtin.stat:
-        path: /var/www/html/index.html
-      register: index_file_stats
-
-    - name: Rename index.html to index.html.old (if it exists)
+    - name: remove index.html made by Apache2
       ansible.builtin.file:
         path: /var/www/html/index.html
-        dest: /var/www/html/index.html.old
-        state: file
-      when: index_file_stats.stat.exists
+        state: absent
+      when: not setup_complete
 
     - name: Copy web files
       ansible.builtin.copy:
