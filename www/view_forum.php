@@ -122,11 +122,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <?php if ($totalPages > 1): ?>
         <nav>
-            <ul>
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <li><a href="?forum_id=<?php echo $forum_id; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                <?php endfor; ?>
-            </ul>
+            Síða:
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <a href="?forum_id=<?php echo $forum_id; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            <?php endfor; ?>        
         </nav>
     <?php endif; ?>
     
