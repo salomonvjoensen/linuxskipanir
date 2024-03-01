@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
         // Commit transaction
         $pdo->commit();
 
-        header("Location: view_thread.php?thread_id=" . $thread_id . "&page=" . $newPage); // Redirect to the last page with the new post
+        header("Location: view_thread.php?thread_id=" . $thread_id . "&forum_id=" . $_GET['forum_id'] . "&page=" . $newPage); // Redirect to the last page with the new post
         exit();
     } catch (Exception $e) {
         $pdo->rollback();
@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_post'])) {
         <button id="toggleCreateReplyButton" onClick="toggleReplyForm();">Svara tráð</button>
     </div>
 
-    <form id="toggleReplyForm" style="visibility: hidden;" action="view_thread.php?thread_id=<?php echo $thread_id; ?>" method="post" enctype="multipart/form-data">
+    <form id="toggleReplyForm" style="visibility: hidden;" action="view_thread.php?thread_id=<?php echo $thread_id; ?>&forum_id=<?php echo htmlspecialchars($forum_id); ?>" method="post" enctype="multipart/form-data">
         <label for="author_name">Títt navn (valfrítt):</label>
         <input type="text" id="author_name" name="author_name"><br><br>
         <label for="post_text">Títt svar:</label>

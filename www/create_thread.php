@@ -67,7 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="gradient-box"><div class="small-title">Stovna nýggjan tráð í</div><div class="title"><?php echo htmlspecialchars($forum_name); ?></div></div>
+    <div class="nav-bar">
+        <!-- "Go Back" Button -->
+        <button onclick="goBackStructured()">Go Back</button>
+    </div>
+    <div id="forum" class="forum">
+        <div class="small-title">Stovna nýggjan </div>
+        <div class="title"><?php echo htmlspecialchars($forum_name); ?></div>
+    </div>
     <br>
     <form action="create_thread.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="forum_id" value="<?php echo $_GET['forum_id']; ?>">
@@ -81,5 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="file" id="post_image" name="post_image"><br><br>
         <input type="submit" value="Create Thread">
     </form>
+    <script src="script.js"></script>
 </body>
 </html>
