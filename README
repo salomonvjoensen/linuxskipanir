@@ -1,6 +1,8 @@
-You can pull from this repository with Ansible, to create the Forum on a Linux/Ubuntu environment.
+You can pull from this repository with Ansible, to create the Forum on a Linux/Ubuntu environment with this command from the terminal:
+
+sudo ansible-pull -U https://github.com/salomonvjoensen/linuxskipanir.git
 
 You will prompted for MySQL username and password,
 and for kjakdb database username and password, when pulling from this repository with Ansible.
 
-Last updated: 26. Feb. 2024
+Last updated: 1. March. 2024
