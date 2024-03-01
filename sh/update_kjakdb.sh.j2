@@ -104,13 +104,13 @@ set_auto_increment() {
   local table=$1
   local column=$2
 
-   # Check if AUTO_INCREMENT is already set with desired value
-   if mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D information_schema -sse "SELECT AUTO_INCREMENT FROM TABLES WHERE TABLE_SCHEMA = '$DATABASE' AND TABLE_NAME = '$table' AND COLUMN_NAME = '$column'" | grep -q [desired_starting_value]; then
-       echo "$column in $table is already set to AUTO_INCREMENT with desired value."
-   else
-      echo "Setting AUTO_INCREMENT for $column in $table..."
-      mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "ALTER TABLE $table MODIFY $column int(11) NOT NULL AUTO_INCREMENT;"
-   fi
+  # Check if AUTO_INCREMENT is already set
+  if ! mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D information_schema -sse "SELECT AUTO_INCREMENT FROM TABLES WHERE TABLE_SCHEMA = '$DATABASE' AND TABLE_NAME = '$table' AND COLUMN_NAME = '$column'"; then 
+    echo "Setting AUTO_INCREMENT for $column in $table..."
+    mysql -u "$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" -D "$DATABASE" -e "ALTER TABLE $table MODIFY $column int(11) NOT NULL AUTO_INCREMENT;"
+  else
+    echo "$column in $table is already set to AUTO_INCREMENT."
+  fi
 }
 
 # Ensure 'anon' user exists and grant permissions

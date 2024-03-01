@@ -78,7 +78,7 @@
       ansible.builtin.file:
         src: /var/www/html/index.html
         dest: /var/www/html/index.html.old
-        state: file
+        state: rename
       when: index_file_stats.stat.exists
 
     - name: Copy web files
