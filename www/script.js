@@ -69,7 +69,7 @@ function setupImageToggle() {
         image.style.maxWidth = '150px';
 
       image.addEventListener('click', function() {
-        if (this.style.width === '150px') {
+        if (this.style.maxWidth === '150px') {
           // Restore original size
           this.style.maxWidth = '500px';
         } else {
